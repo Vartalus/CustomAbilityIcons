@@ -1,0 +1,15 @@
+{
+    "Lua.diagnostics.globals": [
+        "EVENT_MANAGER",
+        "EVENT_ADD_ON_LOADED",
+        "SLASH_COMMANDS",
+        "CHAT_SYSTEM",
+        "GetSlotBoundId",
+        "slotIndex",
+        "RedirectTexture",
+        "GetDisplayName",
+        "addonName",
+        "ZO_SavedVars",
+        "CustomAbilityIcons_SavedVariables"
+    ]
+}
