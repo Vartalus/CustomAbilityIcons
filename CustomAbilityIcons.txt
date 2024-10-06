@@ -1,0 +1,23 @@
+; This file is the Custom Ability Icons manifest file.  The details of the file layout can be found at the addon wiki:
+; http://wiki.esoui.com/Addon_manifest_%28.txt%29_format
+;
+; This file has the basic parts: metadata, comments, library files, source files
+;
+## Title: Custom Ability Icons
+## Description: The Custom Ability Icons ESO addon changes the ability icons with custom selections.
+## APIVersion: 100035 101031
+## Author: Vartalus & Iresil
+## Version: 0.1
+## SavedVariables: CustomAbilityIconsSavedVars
+;
+; The below lua files are loaded in this order
+; see http://www.esoui.com/downloads/cat53.html
+; see http://www.esoui.com/downloads/info44-LibStub.html
+
+; library menu files
+; see http://www.esoui.com/downloads/info7-LibAddonMenu.html
+
+; debug library, see http://www.esoui.com/downloads/info348-LibDebug.html
+
+; lua files declared in this order so functions are declared prior to use
+CustomAbilityIcons.lua
