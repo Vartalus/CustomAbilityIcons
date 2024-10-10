@@ -56,7 +56,7 @@ function CustomAbilityIcons.GetSkillStyleIcon(slotIndex)
     local skillType, skillLineIndex, skillIndex = GetSpecificSkillAbilityKeysByAbilityId(baseAbilityId)
     local progressionId = GetProgressionSkillProgressionId(skillType, skillLineIndex, skillIndex)
     local collectibleId = GetActiveProgressionSkillAbilityFxOverrideCollectibleId(progressionId)
-    if not collectibleId or collectibleId == 0 then
+    if (collectibleId or 0) == 0 then
         return nil
     end
     local collectibleIcon = GetCollectibleIcon(collectibleId)
@@ -70,8 +70,10 @@ function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
 
         SLASH_COMMANDS["/geticon"] = function(skillIndex)
             local index = tonumber(skillIndex) or 0
-            if index < MIN_INDEX or (index > MAX_INDEX and index < SLOT_INDEX_OFFSET + MIN_INDEX)
-               or index > SLOT_INDEX_OFFSET + MAX_INDEX then
+            if index < MIN_INDEX
+               or (index > MAX_INDEX and index < SLOT_INDEX_OFFSET + MIN_INDEX)
+               or index > SLOT_INDEX_OFFSET + MAX_INDEX
+            then
                 index = 5
             end
             local result = CustomAbilityIcons.GetSkillStyleIcon(index);
