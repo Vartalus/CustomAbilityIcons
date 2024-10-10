@@ -50,6 +50,9 @@ end
 function CustomAbilityIcons.GetSkillStyleIcon(slotIndex)
     local abilityId = GetSlotBoundId(slotIndex)
     local progressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(abilityId)
+	if (progressionData or 0) == 0 then
+        return nil
+    end
     local skillData = progressionData:GetSkillData()
     local baseMorphData = skillData:GetMorphData(MORPH_SLOT_BASE)
     local baseAbilityId = baseMorphData:GetAbilityId()
@@ -63,8 +66,34 @@ function CustomAbilityIcons.GetSkillStyleIcon(slotIndex)
     return collectibleIcon
 end
 
+function CustomAbilityIcons.GetAbilityIcon(slotIndex)
+	local abilityId = GetSlotBoundId(slotIndex)
+	local actionType = GetSlotType(slotIndex)
+	if actionType == ACTION_TYPE_CRAFTED_ABILITY then
+	    abilityId = GetAbilityIdForCraftedAbilityId(abilityId)
+	end
+	return GetAbilityIcon(abilityId)
+end
+
+function CustomAbilityIcons.ReplaceAbilityBarIcon(slotIndex, icon)
+    local btn = ZO_ActionBar_GetButton(slotIndex)
+    if btn then
+        btn.icon:SetTexture(icon)
+    end
+end
+
+function CustomAbilityIcons.OnCollectibleUpdated(_, collectibleId)
+	for index = MIN_INDEX, MAX_INDEX do
+		local result = CustomAbilityIcons.GetSkillStyleIcon(index) or CustomAbilityIcons.GetAbilityIcon(index)
+		if (result or "") ~= "" then
+			CustomAbilityIcons.ReplaceAbilityBarIcon(index, result)
+		end
+	end
+end
+
 function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
     if addOnName == CustomAbilityIcons.name then
+        EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_COLLECTIBLE_UPDATED, CustomAbilityIcons.OnCollectibleUpdated)
         -- Unregister the event as our addon was loaded and we do not need it to be run for every other addon that will load
         EVENT_MANAGER:UnregisterForEvent(CustomAbilityIcons.name, EVENT_ADD_ON_LOADED)
 
@@ -76,13 +105,18 @@ function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
             then
                 index = 5
             end
-            local result = CustomAbilityIcons.GetSkillStyleIcon(index);
-            CHAT_SYSTEM:AddMessage("Collectible Icon: " .. (result or 0));
+            local result = CustomAbilityIcons.GetSkillStyleIcon(index) or CustomAbilityIcons.GetAbilityIcon(index)
+			
+            if result then
+                CustomAbilityIcons.ReplaceAbilityBarIcon(index, result)
+            end
+            CHAT_SYSTEM:AddMessage("Collectible Icon: " .. (result or 0))
         end
         
-        CustomAbilityIcons.Initialize()
+        --CustomAbilityIcons.Initialize()
     end
 end
+
 
 ----------
 -- Main --
