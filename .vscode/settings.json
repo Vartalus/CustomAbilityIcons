@@ -3,6 +3,7 @@
         "EVENT_MANAGER",
         "SKILLS_DATA_MANAGER",
         "EVENT_ADD_ON_LOADED",
+        "EVENT_COLLECTIBLE_UPDATED",
         "SLASH_COMMANDS",
         "ACTION_TYPE_CRAFTED_ABILITY",
         "CHAT_SYSTEM",
@@ -21,6 +22,6 @@
         "addonName",
         "ZO_ActionBar_GetButton",
         "ZO_SavedVars",
-        "CustomAbilityIcons_SavedVariables",
+        "CustomAbilityIcons_SavedVariables"
     ]
 }

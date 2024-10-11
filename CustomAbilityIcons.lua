@@ -5,7 +5,7 @@ CustomAbilityIcons.name = "CustomAbilityIcons"
 -- Declarations --
 ------------------
 local ADDON_VERSION = "0.1"
-local SAVEDVARIABLES_VERSION = 1
+local SAVEDVARIABLES_VERSION = 1.1
 local eso_root = "esoui/art/icons/"
 
 CustomAbilityIcons.version = ADDON_VERSION
@@ -27,6 +27,22 @@ local styled_skill_icons = {
 -- Functions --
 ---------------
 function CustomAbilityIcons.Initialize()
+    local defaults = {
+        --Icon = GetString(CUSTOM_ABILITY_ICONS),
+        version = SAVEDVARIABLES_VERSION,
+        Replace_Skill_Icons = false,
+    }
+    
+    CustomAbilityIcons.SV = ZO_SavedVars:NewAccountWide("CustomAbilityIcons_SavedVariables", SAVEDVARIABLES_VERSION, nil, defaults)
+    local sv = CustomAbilityIcons_SavedVariables["Default"][GetDisplayName()]["$AccountWide"]
+    -- Clean up leftover saved variables (from previous versions)
+    for key, _ in pairs(sv) do
+        -- Delete key-value pair if the key can't also be found in the default settings (except for version)
+        if key ~= "version" and defaults[key] == nil then
+            sv[key] = nil
+        end
+    end
+    
     local function replaceSkillIcons()
         for i = 1, #normal_skill_icons do
             for j = 1, #normal_skill_icons[i] do
@@ -35,14 +51,7 @@ function CustomAbilityIcons.Initialize()
         end
     end
     
-    local defaults = {
-        version = SAVEDVARIABLES_VERSION,
-        Replace_Skill_Icons = false,
-    }
-    
-    CustomAbilityIcons.SV = ZO_SavedVars:NewAccountWide("CustomAbilityIcons_SavedVariables", SAVEDVARIABLES_VERSION, nil, defaults)
-    
-    if CustomAbilityIcons.SV.Replace_Skill_Icons then
+    if CustomAbilityIcons.SV.Replace_Skill_Icons == true then
         replaceSkillIcons()
     end
 end
@@ -111,6 +120,15 @@ function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
                 CustomAbilityIcons.ReplaceAbilityBarIcon(index, result)
             end
             CHAT_SYSTEM:AddMessage("Collectible Icon: " .. (result or 0))
+        end
+
+        SLASH_COMMANDS["/refreshsavedvars"] = function ()
+            local sv = CustomAbilityIcons_SavedVariables["Default"][GetDisplayName()]["$AccountWide"]
+            for key, _ in pairs(sv) do
+                sv[key] = nil
+            end
+            
+            CustomAbilityIcons.Initialize()
         end
         
         CustomAbilityIcons.Initialize()
