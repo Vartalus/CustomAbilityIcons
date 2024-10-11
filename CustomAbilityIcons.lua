@@ -10,10 +10,10 @@ local eso_root = "esoui/art/icons/"
 
 CustomAbilityIcons.version = ADDON_VERSION
 
-local MIN_INDEX = 3;                          -- first ability index
-local MAX_INDEX = 8;                          -- last ability: 7, ultimate: 8
-local SLOT_INDEX_OFFSET = 20;                 -- offset for backbar abilities indices
-local COMPANION_INDEX_OFFSET = 30;            -- offset for companion ultimate
+local MIN_INDEX = 3                          -- first ability index
+local MAX_INDEX = 8                          -- last ability: 7, ultimate: 8
+local SLOT_INDEX_OFFSET = 20                 -- offset for backbar abilities indices
+local COMPANION_INDEX_OFFSET = 30            -- offset for companion ultimate
 
 local normal_skill_icons = {
     { "ability_destructionstaff_002.dds", "ability_destructionstaff_002a.dds", "ability_destructionstaff_002b.dds" }
@@ -37,7 +37,7 @@ function CustomAbilityIcons.Initialize()
     
     local defaults = {
         version = SAVEDVARIABLES_VERSION,
-        Replace_Skill_Icons = true,
+        Replace_Skill_Icons = false,
     }
     
     CustomAbilityIcons.SV = ZO_SavedVars:NewAccountWide("CustomAbilityIcons_SavedVariables", SAVEDVARIABLES_VERSION, nil, defaults)
@@ -113,7 +113,7 @@ function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
             CHAT_SYSTEM:AddMessage("Collectible Icon: " .. (result or 0))
         end
         
-        --CustomAbilityIcons.Initialize()
+        CustomAbilityIcons.Initialize()
     end
 end
 

@@ -4,9 +4,11 @@
         "SKILLS_DATA_MANAGER",
         "EVENT_ADD_ON_LOADED",
         "SLASH_COMMANDS",
+        "ACTION_TYPE_CRAFTED_ABILITY",
         "CHAT_SYSTEM",
         "MORPH_SLOT_BASE",
         "GetSlotBoundId",
+        "GetSlotType",
         "slotIndex",
         "RedirectTexture",
         "GetDisplayName",
@@ -14,8 +16,11 @@
         "GetProgressionSkillProgressionId",
         "GetActiveProgressionSkillAbilityFxOverrideCollectibleId",
         "GetCollectibleIcon",
+        "GetAbilityIdForCraftedAbilityId",
+        "GetAbilityIcon",
         "addonName",
+        "ZO_ActionBar_GetButton",
         "ZO_SavedVars",
-        "CustomAbilityIcons_SavedVariables"
+        "CustomAbilityIcons_SavedVariables",
     ]
 }
