@@ -4,6 +4,7 @@ CustomAbilityIcons.name = "CustomAbilityIcons"
 ------------------
 -- Declarations --
 ------------------
+
 local ADDON_VERSION = "0.1"
 local SAVEDVARIABLES_VERSION = 1.1
 local eso_root = "esoui/art/icons/"
@@ -26,6 +27,8 @@ local styled_skill_icons = {
 ---------------
 -- Functions --
 ---------------
+
+--- Initializes the saved variables and replaces skill icons, if the saved variables dictate it.
 function CustomAbilityIcons.Initialize()
     local defaults = {
         --Icon = GetString(CUSTOM_ABILITY_ICONS),
@@ -43,6 +46,9 @@ function CustomAbilityIcons.Initialize()
         end
     end
     
+    --- Calls RedirectTexture to replace an existing skill icon with a different one.
+    --- If you use this and you want to reverse the effect, you first need to use the /refreshsavedvars command,
+    --- and then quit the game.
     local function replaceSkillIcons()
         for i = 1, #normal_skill_icons do
             for j = 1, #normal_skill_icons[i] do
@@ -56,6 +62,10 @@ function CustomAbilityIcons.Initialize()
     end
 end
 
+--- Retrieves the path of the selected collectible icon for the skill found in the specified slotIndex.
+--- @param slotIndex number The index of a given skill in the action bar.
+--- @return nil collectibleIcon The path of the icon that corresponds to the selected skill style for the requested
+--- skill. If no skill style is selected, nil will be returned.
 function CustomAbilityIcons.GetSkillStyleIcon(slotIndex)
     local abilityId = GetSlotBoundId(slotIndex)
     local progressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(abilityId)
@@ -71,10 +81,12 @@ function CustomAbilityIcons.GetSkillStyleIcon(slotIndex)
     if (collectibleId or 0) == 0 then
         return nil
     end
-    local collectibleIcon = GetCollectibleIcon(collectibleId)
-    return collectibleIcon
+    return GetCollectibleIcon(collectibleId)
 end
 
+--- Retrieves the ability id of the skill found in the specified slotIndex.
+--- @param slotIndex number The index of a given skill in the action bar.
+--- @return string abilityIcon The path of the icon that corresponds to the skill in question.
 function CustomAbilityIcons.GetAbilityIcon(slotIndex)
 	local abilityId = GetSlotBoundId(slotIndex)
 	local actionType = GetSlotType(slotIndex)
@@ -84,6 +96,10 @@ function CustomAbilityIcons.GetAbilityIcon(slotIndex)
 	return GetAbilityIcon(abilityId)
 end
 
+--- Calls SetTexture to replace the icon of the skill found in the specified slotIndex.
+--- Needs to be called from multiple events.
+--- @param slotIndex number The index of a given skill in the action bar.
+--- @param icon string The path of the icon that will be assigned to the skill in question.
 function CustomAbilityIcons.ReplaceAbilityBarIcon(slotIndex, icon)
     local btn = ZO_ActionBar_GetButton(slotIndex)
     if btn then
@@ -91,6 +107,13 @@ function CustomAbilityIcons.ReplaceAbilityBarIcon(slotIndex, icon)
     end
 end
 
+------------
+-- Events --
+------------
+
+--- To be used in any event when the skill icons need to be refreshed.
+--- @param _ any
+--- @param collectibleId any
 function CustomAbilityIcons.OnCollectibleUpdated(_, collectibleId)
 	for index = MIN_INDEX, MAX_INDEX do
 		local result = CustomAbilityIcons.GetSkillStyleIcon(index) or CustomAbilityIcons.GetAbilityIcon(index)
@@ -100,6 +123,9 @@ function CustomAbilityIcons.OnCollectibleUpdated(_, collectibleId)
 	end
 end
 
+--- To be used during game initialization. Code contained in this method needs to run conditionally, for this addon only.
+--- @param eventCode any
+--- @param addOnName any
 function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
     if addOnName == CustomAbilityIcons.name then
         EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_COLLECTIBLE_UPDATED, CustomAbilityIcons.OnCollectibleUpdated)
@@ -139,4 +165,5 @@ end
 ----------
 -- Main --
 ----------
+
 EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_ADD_ON_LOADED, CustomAbilityIcons.OnAddOnLoaded)
