@@ -119,7 +119,7 @@ end
 --- @param slotIndex number The index of a given skill in the action bar.
 --- @param inactiveHotbarCategory number? If nil is passed, the active hotbar will be used. If it has a value, it is the category of the inactive hotbar.
 function CustomAbilityIcons.ApplySkillStyle(slotIndex, inactiveHotbarCategory)
-    local result = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, inactiveHotbarCategory)
+    local result = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, inactiveHotbarCategory) or CustomAbilityIcons.GetAbilityIcon(slotIndex, inactiveHotbarCategory)
     if (result or "") ~= "" then
         --- @diagnostic disable-next-line: param-type-mismatch
         CustomAbilityIcons.ReplaceAbilityBarIcon(slotIndex, inactiveHotbarCategory, result)
