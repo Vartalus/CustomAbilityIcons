@@ -35,7 +35,7 @@ function CustomAbilityIcons.Initialize()
         version = SAVEDVARIABLES_VERSION,
         Replace_Skill_Icons = false,
     }
-    
+
     CustomAbilityIcons.SV = ZO_SavedVars:NewAccountWide("CustomAbilityIcons_SavedVariables", SAVEDVARIABLES_VERSION, nil, defaults)
     local sv = CustomAbilityIcons_SavedVariables["Default"][GetDisplayName()]["$AccountWide"]
     -- Clean up leftover saved variables (from previous versions)
@@ -45,7 +45,7 @@ function CustomAbilityIcons.Initialize()
             sv[key] = nil
         end
     end
-    
+
     --- Calls RedirectTexture to replace an existing skill icon with a different one.
     --- If you use this and you want to reverse the effect, you first need to use the /refreshsavedvars command,
     --- and then quit the game.
@@ -56,7 +56,7 @@ function CustomAbilityIcons.Initialize()
             end
         end
     end
-    
+
     if CustomAbilityIcons.SV.Replace_Skill_Icons == true then
         replaceSkillIcons()
     end
@@ -121,6 +121,7 @@ end
 function CustomAbilityIcons.ApplySkillStyle(slotIndex, inactiveHotbarCategory)
     local result = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, inactiveHotbarCategory)
     if (result or "") ~= "" then
+        --- @diagnostic disable-next-line: param-type-mismatch
         CustomAbilityIcons.ReplaceAbilityBarIcon(slotIndex, inactiveHotbarCategory, result)
     end
 end
@@ -135,23 +136,11 @@ end
 function CustomAbilityIcons.OnCollectibleUpdated(_, collectibleId)
 	for index = MIN_INDEX, MAX_INDEX do
         local inactiveBar = currentHotbarCategory == HOTBAR_CATEGORY_PRIMARY and HOTBAR_CATEGORY_BACKUP or HOTBAR_CATEGORY_PRIMARY;
-		
+
         CustomAbilityIcons.ApplySkillStyle(index, nil)
         CustomAbilityIcons.ApplySkillStyle(index, inactiveBar)
 	end
 end
-
---function CustomAbilityIcons.OnWeaponSwap(eventCode, WeaponPair, locked)
---	CustomAbilityIcons.OnCollectibleUpdated(nil, nil)
---end
-
---function CustomAbilityIcons.OnActiveHotbarUpdated(_, didActiveHotbarChange, shouldUpdateAbilityAssignments, activeHotbarCategory)
---	CustomAbilityIcons.OnCollectibleUpdated(nil, nil)
---end
-
---function CustomAbilityIcons.OnAllHotbarsUpdated()
---    CustomAbilityIcons.OnCollectibleUpdated(nil, nil)
---end
 
 --- Local alias for GetSlotTexture, introduced to avoid overflowing the stack due to mutual recursion between
 --- GetSlotTexture and its SecurePostHook.
@@ -175,17 +164,6 @@ end)
 function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
     if addOnName == CustomAbilityIcons.name then
         EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_COLLECTIBLE_UPDATED, CustomAbilityIcons.OnCollectibleUpdated)
-        --EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_ACTION_SLOT_UPDATED, CustomAbilityIcons.OnCollectibleUpdated)
-        --EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_ABILITY_LIST_CHANGED, CustomAbilityIcons.OnCollectibleUpdated)
-        --EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_ACTION_SLOTS_ACTIVE_HOTBAR_UPDATED, CustomAbilityIcons.OnActiveHotbarUpdated)
-        --EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED, CustomAbilityIcons.OnAllHotbarsUpdated)
-        --EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_ARMORY_BUILD_RESTORE_RESPONSE, CustomAbilityIcons.OnAllHotbarsUpdated)
-        --EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_PLAYER_ACTIVATED, function ()
-        --    EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_ACTIVE_WEAPON_PAIR_CHANGED, CustomAbilityIcons.OnWeaponSwap);
-        --    CustomAbilityIcons.OnCollectibleUpdated(nil, nil)
-        --    EVENT_MANAGER:UnregisterForEvent(CustomAbilityIcons.name, EVENT_PLAYER_ACTIVATED);
-        --end);
-        --EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_ACTION_SLOTS_FULL_UPDATE, CustomAbilityIcons.OnCollectibleUpdated)
 
         -- Unregister the event as our addon was loaded and we do not need it to be run for every other addon that will load
         EVENT_MANAGER:UnregisterForEvent(CustomAbilityIcons.name, EVENT_ADD_ON_LOADED)
@@ -207,10 +185,10 @@ function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
             for key, _ in pairs(sv) do
                 sv[key] = nil
             end
-            
+
             CustomAbilityIcons.Initialize()
         end
-        
+
         CustomAbilityIcons.Initialize()
     end
 end
