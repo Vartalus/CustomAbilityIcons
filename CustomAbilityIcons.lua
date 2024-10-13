@@ -72,8 +72,7 @@ function CustomAbilityIcons.GetSkillStyleIcon(slotIndex, inactiveHotbarCategory)
     if (abilityId or 0) == 0 then
         return nil
     end
-    --- @diagnostic disable-next-line: param-type-mismatch
-    local baseAbilityId = CustomAbilityIcons.GetBaseAbilityId(abilityId)
+    local baseAbilityId = CustomAbilityIcons.GetBaseAbilityId(slotIndex, inactiveHotbarCategory)
 
     local skillType, skillLineIndex, skillIndex = GetSpecificSkillAbilityKeysByAbilityId(baseAbilityId)
     local progressionId = GetProgressionSkillProgressionId(skillType, skillLineIndex, skillIndex)
@@ -98,9 +97,17 @@ end
 
 --- Retrieves the base ability id of the skill with the specified ability id. For skills without progression or
 --- morph data the provided ability id will be returned.
---- @param abilityId number An ability id that may belong to a normal or scribed skill.
---- @return number baseAbilityId The base ability id of the specified skill, or the provided ability id for skills with no base morph.
-function CustomAbilityIcons.GetBaseAbilityId(abilityId)
+--- @param slotIndex number The index of a given skill in the action bar.
+--- @param inactiveHotbarCategory number? If nil is passed, the active hotbar will be used. If it has a value, it is the category of the inactive hotbar.
+--- @return number? baseAbilityId The base ability id of the specified skill, or the provided ability id for skills with no base morph.
+function CustomAbilityIcons.GetBaseAbilityId(slotIndex, inactiveHotbarCategory)
+    inactiveHotbarCategory = inactiveHotbarCategory or GetActiveHotbarCategory()
+    local abilityId = CustomAbilityIcons.GetAbilityId(slotIndex, inactiveHotbarCategory)
+    local actionType = GetSlotType(slotIndex, inactiveHotbarCategory)
+    if actionType == ACTION_TYPE_CRAFTED_ABILITY then
+        return GetAbilityIdForCraftedAbilityId(abilityId)
+    end
+
     local progressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(abilityId)
     if (progressionData or 0) == 0 then
         return abilityId
@@ -127,12 +134,7 @@ function CustomAbilityIcons.GetAbilityId(slotIndex, inactiveHotbarCategory)
     end
 
     inactiveHotbarCategory = inactiveHotbarCategory or GetActiveHotbarCategory()
-    local abilityId = GetSlotBoundId(slotIndex, inactiveHotbarCategory)
-    local actionType = GetSlotType(slotIndex, inactiveHotbarCategory)
-    if actionType == ACTION_TYPE_CRAFTED_ABILITY then
-        abilityId = GetAbilityIdForCraftedAbilityId(abilityId)
-    end
-    return abilityId
+    return GetSlotBoundId(slotIndex, inactiveHotbarCategory)
 end
 
 --- Calls SetTexture to replace the icon of the skill found in the specified slotIndex.
@@ -206,7 +208,10 @@ function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
 
         SLASH_COMMANDS["/getabilityid"] = function(skillIndex)
             local abilityId = CustomAbilityIcons.GetAbilityId(skillIndex, nil)
+            local baseAbilityId = CustomAbilityIcons.GetBaseAbilityId(skillIndex, nil)
+
             CHAT_SYSTEM:AddMessage("Ability ID: " .. (abilityId or -1))
+            CHAT_SYSTEM:AddMessage("Base Ability ID: " .. (baseAbilityId or -1))
         end
 
         SLASH_COMMANDS["/geticon"] = function(skillIndex)
