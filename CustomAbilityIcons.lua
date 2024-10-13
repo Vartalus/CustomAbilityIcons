@@ -17,13 +17,13 @@ local MAX_INDEX = 8                          -- last ability: 7, ultimate: 8
 local SLOT_INDEX_OFFSET = 20                 -- offset for backbar abilities indices
 local COMPANION_INDEX_OFFSET = 30            -- offset for companion ultimate
 
+local ELEMENTAL_EXPLOSION_ABILITYID = 217228
 local FIRE = "fire"
 local FROST = "frost"
 local SHOCK = "shock"
 local MAGIC = "magic"
-local DEFAULT = "default"
 local DISPEL = "dispel"
-local ELEMENTAL_EXPLOSION_ABILITYID = 217228
+local DEFAULT = "default"
 
 local custom_ability_icons = {
     [ELEMENTAL_EXPLOSION_ABILITYID] = {     -- elemental explosion
@@ -84,10 +84,14 @@ end
 --- @param slotIndex number The index of a given skill in the action bar.
 --- @param inactiveHotbarCategory number? If nil is passed, the active hotbar will be used. If it has a value, it is the category of the inactive hotbar.
 --- @return string? abilityIcon The path of the icon that corresponds to the skill in question.
-function CustomAbilityIcons.GetAbilityIcon(slotIndex, inactiveHotbarCategory)
+function CustomAbilityIcons.GetDefaultAbilityIcon(slotIndex, inactiveHotbarCategory)
     local abilityId = CustomAbilityIcons.GetAbilityId(slotIndex, inactiveHotbarCategory)
     if (abilityId or 0) == 0 then
         return nil
+    end
+    local actionType = GetSlotType(slotIndex, inactiveHotbarCategory)
+    if actionType == ACTION_TYPE_CRAFTED_ABILITY then
+        abilityId = GetAbilityIdForCraftedAbilityId(abilityId)
     end
     return GetAbilityIcon(abilityId)
 end
@@ -192,8 +196,9 @@ end
 --- @param slotIndex number The index of a given skill in the action bar.
 --- @param inactiveHotbarCategory number? If nil is passed, the active hotbar will be used. If it has a value, it is the category of the inactive hotbar.
 function CustomAbilityIcons.ApplySkillStyle(slotIndex, inactiveHotbarCategory)
-    local icon = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, inactiveHotbarCategory) or CustomAbilityIcons.GetCustomAbilityIcon(slotIndex, inactiveHotbarCategory) 
-                 or CustomAbilityIcons.GetAbilityIcon(slotIndex, inactiveHotbarCategory)
+    local icon = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, inactiveHotbarCategory)
+                 or CustomAbilityIcons.GetCustomAbilityIcon(slotIndex, inactiveHotbarCategory)
+                 or CustomAbilityIcons.GetDefaultAbilityIcon(slotIndex, inactiveHotbarCategory)
     if (icon or "") ~= "" then
         --- @diagnostic disable-next-line: param-type-mismatch
         CustomAbilityIcons.ReplaceAbilityBarIcon(slotIndex, inactiveHotbarCategory, icon)
@@ -209,7 +214,8 @@ end
 --- @param collectibleId any
 function CustomAbilityIcons.OnCollectibleUpdated(_, collectibleId)
     for index = MIN_INDEX, MAX_INDEX do
-        local inactiveBar = currentHotbarCategory == HOTBAR_CATEGORY_PRIMARY and HOTBAR_CATEGORY_BACKUP or HOTBAR_CATEGORY_PRIMARY;
+        local inactiveBar = currentHotbarCategory == HOTBAR_CATEGORY_PRIMARY
+                            and HOTBAR_CATEGORY_BACKUP or HOTBAR_CATEGORY_PRIMARY;
 
         CustomAbilityIcons.ApplySkillStyle(index, nil)
         CustomAbilityIcons.ApplySkillStyle(index, inactiveBar)
@@ -221,7 +227,8 @@ end
 local originalGetSlotTexture = GetSlotTexture
 SecurePostHook("GetSlotTexture", function(slotIndex, hotbarCategory)
     if hotbarCategory then
-        local newIcon = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, hotbarCategory) or CustomAbilityIcons.GetCustomAbilityIcon(slotIndex, hotbarCategory) 
+        local newIcon = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, hotbarCategory)
+                        or CustomAbilityIcons.GetCustomAbilityIcon(slotIndex, hotbarCategory)
         local icon, weaponIcon, activationAnimation = originalGetSlotTexture(slotIndex, hotbarCategory)
         if newIcon then
             icon = newIcon
@@ -261,9 +268,13 @@ function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
             end
         end
 
-        SLASH_COMMANDS["/geticon"] = function(skillIndex)
-            local icon = CustomAbilityIcons.GetSkillStyleIcon(skillIndex, nil) or CustomAbilityIcons.GetAbilityIcon(skillIndex, nil)
-            CHAT_SYSTEM:AddMessage("Collectible Icon: " .. (icon or ""))
+        SLASH_COMMANDS["/geticons"] = function(skillIndex)
+            local collectibleIcon = CustomAbilityIcons.GetSkillStyleIcon(skillIndex, nil)
+            CHAT_SYSTEM:AddMessage("Collectible Icon: " .. (collectibleIcon or ""))
+            local customIcon = CustomAbilityIcons.GetCustomAbilityIcon(slotIndex, nil)
+            CHAT_SYSTEM:AddMessage("Custom Icon: " .. (customIcon or ""))
+            local abilityIcon = CustomAbilityIcons.GetDefaultAbilityIcon(skillIndex, nil)
+            CHAT_SYSTEM:AddMessage("Default Icon: " .. (abilityIcon or ""))
         end
 
         SLASH_COMMANDS["/refreshsavedvars"] = function ()
