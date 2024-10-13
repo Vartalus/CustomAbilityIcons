@@ -18,23 +18,90 @@ local SLOT_INDEX_OFFSET = 20                 -- offset for backbar abilities ind
 local COMPANION_INDEX_OFFSET = 30            -- offset for companion ultimate
 
 local ELEMENTAL_EXPLOSION_ABILITYID = 217228
-local FIRE = "fire"
+local SHIELD_THROW_ABILITYID = 222966
+local SOUL_BURST_ABILITYID = 217459
+local TORCHBEARER_ABILITYID = 217607
+local TRAMPLE_ABILITYID = 217663
+local TRAVELING_KNIFE_ABILITYID = 217872
+local ULFSILDS_CONTINGENCY_ABILITYID = 222678
+local VAULT_ABILITYID = 214960
+local WIELD_SOUL_ABILITYID = 215731
+local FLAME = "flame"
 local FROST = "frost"
 local SHOCK = "shock"
 local MAGIC = "magic"
 local DISPEL = "dispel"
+local PHYSICAL = "physical"
+local BLEED = "bleed"
+local TRAUMA = "trauma"
+local POISON = "poison"
+local DISEASE = "disease"
 local DEFAULT = "default"
 
 local custom_ability_icons = {
-    [ELEMENTAL_EXPLOSION_ABILITYID] = {     -- elemental explosion
-        [FIRE] = eso_root .. "ability_grimoire_staffdestro.dds",
+    [ELEMENTAL_EXPLOSION_ABILITYID] = {
+        [FLAME] = eso_root .. "ability_grimoire_staffdestro.dds",
         [FROST] = addon_root .. "ability_grimoire_staffdestro_frost.dds",
         [SHOCK] = addon_root .. "ability_grimoire_staffdestro_shock.dds",
         [MAGIC] = addon_root .. "ability_grimoire_staffdestro_magic.dds",
         [DISPEL] = addon_root .. "ability_grimoire_staffdestro_magic.dds",
         [DEFAULT] = addon_root .. "ability_grimoire_staffdestro_physical.dds"
-    };
-};
+    },
+    [SHIELD_THROW_ABILITYID] = {
+        [FROST] = nil,
+        [MAGIC] = nil,
+        [PHYSICAL] = nil,
+        [DEFAULT] = eso_root .. "ability_grimoire_1handed.dds"
+    },
+    [SOUL_BURST_ABILITYID] = {
+        [FROST] = nil,
+        [SHOCK] = nil,
+        [MAGIC] = eso_root .. "ability_grimoire_soulmagic2.dds",
+        [PHYSICAL] = nil,
+        [DEFAULT] = nil
+    },
+    [TORCHBEARER_ABILITYID] = {
+        [FLAME] = eso_root .. "ability_grimoire_fightersguild.dds",
+        [PHYSICAL] = nil,
+        [BLEED] = nil,
+        [DEFAULT] = nil
+    },
+    [TRAMPLE_ABILITYID] = {
+        [MAGIC] = nil,
+        [DISPEL] = nil,
+        [PHYSICAL] = nil,
+        [TRAUMA] = nil,
+        [DISEASE] = nil,
+        [DEFAULT] = eso_root .. "ability_grimoire_assault.dds"
+    },
+    [TRAVELING_KNIFE_ABILITYID] = {
+        [MAGIC] = nil,
+        [PHYSICAL] = nil,
+        [BLEED] = nil,
+        [POISON] = nil,
+        [DEFAULT] = eso_root .. "ability_grimoire_dualwield.dds"
+    },
+    [ULFSILDS_CONTINGENCY_ABILITYID] = {
+        [FLAME] = nil,
+        [FROST] = nil,
+        [MAGIC] = eso_root .. "ability_grimoire_magesguild.dds",
+        [DEFAULT] = nil
+    },
+    [VAULT_ABILITYID] = {
+        [FLAME] = nil,
+        [PHYSICAL] = nil,
+        [POISON] = nil,
+        [DISEASE] = nil,
+        [DEFAULT] = eso_root .. "ability_grimoire_bow.dds"
+    },
+    [WIELD_SOUL_ABILITYID] = {
+        [FROST] = nil,
+        [SHOCK] = nil,
+        [MAGIC] = eso_root .. "ability_grimoire_soulmagic1.dds",
+        [PHYSICAL] = nil,
+        [DEFAULT] = nil
+    }
+}
 
 ---------------
 -- Functions --
