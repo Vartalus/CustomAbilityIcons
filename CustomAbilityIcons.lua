@@ -67,15 +67,14 @@ end
 --- @param inactiveHotbarCategory number? If nil is passed, the active hotbar will be used. If it has a value, it is the category of the inactive hotbar.
 --- @return string? collectibleIcon The path of the icon that corresponds to the selected skill style for the requested skill. If no skill style is selected, nil will be returned.
 function CustomAbilityIcons.GetSkillStyleIcon(slotIndex, inactiveHotbarCategory)
-    inactiveHotbarCategory = inactiveHotbarCategory or GetActiveHotbarCategory();
-    local abilityId = GetSlotBoundId(slotIndex, inactiveHotbarCategory)
-    local progressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(abilityId)
-	if (progressionData or 0) == 0 then
+    inactiveHotbarCategory = inactiveHotbarCategory or GetActiveHotbarCategory()
+    local abilityId = CustomAbilityIcons.GetAbilityId(slotIndex, inactiveHotbarCategory)
+    if (abilityId or 0) == 0 then
         return nil
     end
-    local skillData = progressionData:GetSkillData()
-    local baseMorphData = skillData:GetMorphData(MORPH_SLOT_BASE)
-    local baseAbilityId = baseMorphData:GetAbilityId()
+    --- @diagnostic disable-next-line: param-type-mismatch
+    local baseAbilityId = CustomAbilityIcons.GetBaseAbilityId(abilityId)
+
     local skillType, skillLineIndex, skillIndex = GetSpecificSkillAbilityKeysByAbilityId(baseAbilityId)
     local progressionId = GetProgressionSkillProgressionId(skillType, skillLineIndex, skillIndex)
     local collectibleId = GetActiveProgressionSkillAbilityFxOverrideCollectibleId(progressionId)
@@ -85,18 +84,55 @@ function CustomAbilityIcons.GetSkillStyleIcon(slotIndex, inactiveHotbarCategory)
     return GetCollectibleIcon(collectibleId)
 end
 
+--- Retrieves the icon path of the skill found in the specified slotIndex.
+--- @param slotIndex number The index of a given skill in the action bar.
+--- @param inactiveHotbarCategory number? If nil is passed, the active hotbar will be used. If it has a value, it is the category of the inactive hotbar.
+--- @return string? abilityIcon The path of the icon that corresponds to the skill in question.
+function CustomAbilityIcons.GetAbilityIcon(slotIndex, inactiveHotbarCategory)
+    local abilityId = CustomAbilityIcons.GetAbilityId(slotIndex, inactiveHotbarCategory)
+    if (abilityId or 0) == 0 then
+        return nil
+    end
+    return GetAbilityIcon(abilityId)
+end
+
+--- Retrieves the base ability id of the skill with the specified ability id. For skills without progression or
+--- morph data the provided ability id will be returned.
+--- @param abilityId number An ability id that may belong to a normal or scribed skill.
+--- @return number baseAbilityId The base ability id of the specified skill, or the provided ability id for skills with no base morph.
+function CustomAbilityIcons.GetBaseAbilityId(abilityId)
+    local progressionData = SKILLS_DATA_MANAGER:GetProgressionDataByAbilityId(abilityId)
+    if (progressionData or 0) == 0 then
+        return abilityId
+    end
+    local skillData = progressionData:GetSkillData()
+    if (skillData.GetMorphData or 0) == 0 then
+        return abilityId
+    end
+    local baseMorphData = skillData:GetMorphData(MORPH_SLOT_BASE)
+    return baseMorphData:GetAbilityId()
+end
+
 --- Retrieves the ability id of the skill found in the specified slotIndex.
 --- @param slotIndex number The index of a given skill in the action bar.
 --- @param inactiveHotbarCategory number? If nil is passed, the active hotbar will be used. If it has a value, it is the category of the inactive hotbar.
---- @return string abilityIcon The path of the icon that corresponds to the skill in question.
-function CustomAbilityIcons.GetAbilityIcon(slotIndex, inactiveHotbarCategory)
-    inactiveHotbarCategory = inactiveHotbarCategory or GetActiveHotbarCategory();
-	local abilityId = GetSlotBoundId(slotIndex, inactiveHotbarCategory)
-	local actionType = GetSlotType(slotIndex, inactiveHotbarCategory)
-	if actionType == ACTION_TYPE_CRAFTED_ABILITY then
-	    abilityId = GetAbilityIdForCraftedAbilityId(abilityId)
-	end
-	return GetAbilityIcon(abilityId)
+--- @return number? abilityId The ability id that corresponds to the skill in question.
+function CustomAbilityIcons.GetAbilityId(slotIndex, inactiveHotbarCategory)
+    local index = tonumber(slotIndex) or 0
+    if index < MIN_INDEX
+       or (index > MAX_INDEX and index < SLOT_INDEX_OFFSET + MIN_INDEX)
+       or index > SLOT_INDEX_OFFSET + MAX_INDEX
+    then
+        return nil
+    end
+
+    inactiveHotbarCategory = inactiveHotbarCategory or GetActiveHotbarCategory()
+    local abilityId = GetSlotBoundId(slotIndex, inactiveHotbarCategory)
+    local actionType = GetSlotType(slotIndex, inactiveHotbarCategory)
+    if actionType == ACTION_TYPE_CRAFTED_ABILITY then
+        abilityId = GetAbilityIdForCraftedAbilityId(abilityId)
+    end
+    return abilityId
 end
 
 --- Calls SetTexture to replace the icon of the skill found in the specified slotIndex.
@@ -119,10 +155,10 @@ end
 --- @param slotIndex number The index of a given skill in the action bar.
 --- @param inactiveHotbarCategory number? If nil is passed, the active hotbar will be used. If it has a value, it is the category of the inactive hotbar.
 function CustomAbilityIcons.ApplySkillStyle(slotIndex, inactiveHotbarCategory)
-    local result = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, inactiveHotbarCategory) or CustomAbilityIcons.GetAbilityIcon(slotIndex, inactiveHotbarCategory)
-    if (result or "") ~= "" then
+    local icon = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, inactiveHotbarCategory) or CustomAbilityIcons.GetAbilityIcon(slotIndex, inactiveHotbarCategory)
+    if (icon or "") ~= "" then
         --- @diagnostic disable-next-line: param-type-mismatch
-        CustomAbilityIcons.ReplaceAbilityBarIcon(slotIndex, inactiveHotbarCategory, result)
+        CustomAbilityIcons.ReplaceAbilityBarIcon(slotIndex, inactiveHotbarCategory, icon)
     end
 end
 
@@ -134,12 +170,12 @@ end
 --- @param _ any
 --- @param collectibleId any
 function CustomAbilityIcons.OnCollectibleUpdated(_, collectibleId)
-	for index = MIN_INDEX, MAX_INDEX do
+    for index = MIN_INDEX, MAX_INDEX do
         local inactiveBar = currentHotbarCategory == HOTBAR_CATEGORY_PRIMARY and HOTBAR_CATEGORY_BACKUP or HOTBAR_CATEGORY_PRIMARY;
 
         CustomAbilityIcons.ApplySkillStyle(index, nil)
         CustomAbilityIcons.ApplySkillStyle(index, inactiveBar)
-	end
+    end
 end
 
 --- Local alias for GetSlotTexture, introduced to avoid overflowing the stack due to mutual recursion between
@@ -168,16 +204,14 @@ function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
         -- Unregister the event as our addon was loaded and we do not need it to be run for every other addon that will load
         EVENT_MANAGER:UnregisterForEvent(CustomAbilityIcons.name, EVENT_ADD_ON_LOADED)
 
+        SLASH_COMMANDS["/getabilityid"] = function(skillIndex)
+            local abilityId = CustomAbilityIcons.GetAbilityId(skillIndex, nil)
+            CHAT_SYSTEM:AddMessage("Ability ID: " .. (abilityId or -1))
+        end
+
         SLASH_COMMANDS["/geticon"] = function(skillIndex)
-            local index = tonumber(skillIndex) or 0
-            if index < MIN_INDEX
-               or (index > MAX_INDEX and index < SLOT_INDEX_OFFSET + MIN_INDEX)
-               or index > SLOT_INDEX_OFFSET + MAX_INDEX
-            then
-                index = 5
-            end
-            local result = CustomAbilityIcons.GetSkillStyleIcon(index, nil) or CustomAbilityIcons.GetAbilityIcon(index, nil)
-            CHAT_SYSTEM:AddMessage("Collectible Icon: " .. (result or 0))
+            local icon = CustomAbilityIcons.GetSkillStyleIcon(skillIndex, nil) or CustomAbilityIcons.GetAbilityIcon(skillIndex, nil)
+            CHAT_SYSTEM:AddMessage("Collectible Icon: " .. (icon or ""))
         end
 
         SLASH_COMMANDS["/refreshsavedvars"] = function ()
