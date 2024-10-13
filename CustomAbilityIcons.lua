@@ -8,6 +8,7 @@ CustomAbilityIcons.name = "CustomAbilityIcons"
 local ADDON_VERSION = "0.1"
 local SAVEDVARIABLES_VERSION = 1.1
 local eso_root = "esoui/art/icons/"
+local addon_root = "/CustomAbilityIcons/icons/"
 
 CustomAbilityIcons.version = ADDON_VERSION
 
@@ -16,13 +17,24 @@ local MAX_INDEX = 8                          -- last ability: 7, ultimate: 8
 local SLOT_INDEX_OFFSET = 20                 -- offset for backbar abilities indices
 local COMPANION_INDEX_OFFSET = 30            -- offset for companion ultimate
 
-local normal_skill_icons = {
-    { "ability_destructionstaff_002.dds", "ability_destructionstaff_002a.dds", "ability_destructionstaff_002b.dds" }
-}
+local FIRE = "fire"
+local FROST = "frost"
+local SHOCK = "shock"
+local MAGIC = "magic"
+local DEFAULT = "default"
+local DISPEL = "dispel"
+local ELEMENTAL_EXPLOSION_ABILITYID = 217228
 
-local styled_skill_icons = {
-    { "ability_destructionstaff_002_purple.dds" }
-}
+local custom_ability_icons = {
+    [ELEMENTAL_EXPLOSION_ABILITYID] = {     -- elemental explosion
+        [FIRE] = eso_root .. "ability_grimoire_staffdestro.dds",
+        [FROST] = addon_root .. "ability_grimoire_staffdestro_frost.dds",
+        [SHOCK] = addon_root .. "ability_grimoire_staffdestro_shock.dds",
+        [MAGIC] = addon_root .. "ability_grimoire_staffdestro_magic.dds",
+        [DISPEL] = addon_root .. "ability_grimoire_staffdestro_magic.dds",
+        [DEFAULT] = addon_root .. "ability_grimoire_staffdestro_physical.dds"
+    };
+};
 
 ---------------
 -- Functions --
@@ -44,21 +56,6 @@ function CustomAbilityIcons.Initialize()
         if key ~= "version" and defaults[key] == nil then
             sv[key] = nil
         end
-    end
-
-    --- Calls RedirectTexture to replace an existing skill icon with a different one.
-    --- If you use this and you want to reverse the effect, you first need to use the /refreshsavedvars command,
-    --- and then quit the game.
-    local function replaceSkillIcons()
-        for i = 1, #normal_skill_icons do
-            for j = 1, #normal_skill_icons[i] do
-                RedirectTexture(eso_root .. normal_skill_icons[i][j], eso_root .. styled_skill_icons[i][1])
-            end
-        end
-    end
-
-    if CustomAbilityIcons.SV.Replace_Skill_Icons == true then
-        replaceSkillIcons()
     end
 end
 
@@ -93,6 +90,44 @@ function CustomAbilityIcons.GetAbilityIcon(slotIndex, inactiveHotbarCategory)
         return nil
     end
     return GetAbilityIcon(abilityId)
+end
+
+--- Retrieves the custom made icons for crafted abilities.
+--- @param slotIndex number The index of a given skill in the action bar.
+--- @param inactiveHotbarCategory number? If nil is passed, the active hotbar will be used. If it has a value, it is the category of the inactive hotbar.
+--- @return string? abilityIcon The path of the icon to be applied to the skill in question.
+function CustomAbilityIcons.GetCustomAbilityIcon(slotIndex, inactiveHotbarCategory)
+    local abilityId = CustomAbilityIcons.GetAbilityId(slotIndex, inactiveHotbarCategory)
+    if (abilityId or 0) == 0 then
+        return nil
+    end
+    local baseAbilityId = CustomAbilityIcons.GetBaseAbilityId(slotIndex, inactiveHotbarCategory)
+    if (baseAbilityId or 0) == 0 then
+        return nil
+    end
+
+    local primaryScriptId, secondaryScriptId, tertiaryScriptId = GetCraftedAbilityActiveScriptIds(abilityId)
+    if primaryScriptId ~= 0 then
+        local scriptName = GetCraftedAbilityScriptDisplayName(primaryScriptId)
+        --- @diagnostic disable-next-line: param-type-mismatch
+        return MapScriptToIcon(scriptName, baseAbilityId)
+    end
+end
+
+--- Maps the given scriptName and abilityId to their corresponding custom icon.
+--- @param scriptName string The name of the focus script on which to apply the icon.
+--- @param baseAbilityId number The base ability id to which the script has been applied.
+--- @return string? abilityIcon The path of the icon to be applied to the skill in question.
+function MapScriptToIcon(scriptName, baseAbilityId)
+    if custom_ability_icons[baseAbilityId] ~= nil then
+        for key,value in pairs(custom_ability_icons[baseAbilityId]) do
+            if string.find(string.lower(scriptName), key) then
+                return value
+            end
+        end
+
+        return custom_ability_icons[baseAbilityId][DEFAULT]
+    end
 end
 
 --- Retrieves the base ability id of the skill with the specified ability id. For skills without progression or
@@ -157,7 +192,8 @@ end
 --- @param slotIndex number The index of a given skill in the action bar.
 --- @param inactiveHotbarCategory number? If nil is passed, the active hotbar will be used. If it has a value, it is the category of the inactive hotbar.
 function CustomAbilityIcons.ApplySkillStyle(slotIndex, inactiveHotbarCategory)
-    local icon = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, inactiveHotbarCategory) or CustomAbilityIcons.GetAbilityIcon(slotIndex, inactiveHotbarCategory)
+    local icon = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, inactiveHotbarCategory) or CustomAbilityIcons.GetCustomAbilityIcon(slotIndex, inactiveHotbarCategory) 
+                 or CustomAbilityIcons.GetAbilityIcon(slotIndex, inactiveHotbarCategory)
     if (icon or "") ~= "" then
         --- @diagnostic disable-next-line: param-type-mismatch
         CustomAbilityIcons.ReplaceAbilityBarIcon(slotIndex, inactiveHotbarCategory, icon)
@@ -185,7 +221,7 @@ end
 local originalGetSlotTexture = GetSlotTexture
 SecurePostHook("GetSlotTexture", function(slotIndex, hotbarCategory)
     if hotbarCategory then
-        local newIcon = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, hotbarCategory)
+        local newIcon = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, hotbarCategory) or CustomAbilityIcons.GetCustomAbilityIcon(slotIndex, hotbarCategory) 
         local icon, weaponIcon, activationAnimation = originalGetSlotTexture(slotIndex, hotbarCategory)
         if newIcon then
             icon = newIcon
@@ -223,7 +259,6 @@ function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
                     CHAT_SYSTEM:AddMessage("Scribed Skill Link: " .. scriptLink)
                 end
             end
-
         end
 
         SLASH_COMMANDS["/geticon"] = function(skillIndex)
