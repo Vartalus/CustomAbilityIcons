@@ -30,6 +30,7 @@ local FLAME = "flame"
 local FROST = "frost"
 local SHOCK = "shock"
 local MAGIC = "magic"
+local HEAL = "heal"
 local DISPEL = "dispel"
 local PHYSICAL = "physical"
 local BLEED = "bleed"
@@ -48,9 +49,8 @@ local custom_ability_icons = {
         [DEFAULT] = addon_root .. "ability_grimoire_staffdestro_physical.dds"
     },
     [SHIELD_THROW_ABILITYID] = {
-        [FROST] = nil,
-        [MAGIC] = nil,
-        [PHYSICAL] = nil,
+        [FROST] = addon_root .. "ability_grimoire_1handed_frost.dds",
+        [MAGIC] = addon_root .. "ability_grimoire_1handed_magic.dds",
         [DEFAULT] = eso_root .. "ability_grimoire_1handed.dds"
     },
     [SOUL_BURST_ABILITYID] = {
@@ -67,31 +67,30 @@ local custom_ability_icons = {
         [DEFAULT] = nil
     },
     [TRAMPLE_ABILITYID] = {
-        [MAGIC] = nil,
-        [DISPEL] = nil,
-        [PHYSICAL] = nil,
-        [TRAUMA] = nil,
-        [DISEASE] = nil,
+        [MAGIC] = addon_root .. "ability_grimoire_assault_magic.dds",
+        [DISPEL] = addon_root .. "ability_grimoire_assault_dispel.dds",
+        [PHYSICAL] = addon_root .. "ability_grimoire_assault_physical.dds",
+        [TRAUMA] = addon_root .. "ability_grimoire_assault_trauma.dds",
+        [DISEASE] = addon_root .. "ability_grimoire_assault_disease.dds",
         [DEFAULT] = eso_root .. "ability_grimoire_assault.dds"
     },
     [TRAVELING_KNIFE_ABILITYID] = {
-        [MAGIC] = nil,
-        [PHYSICAL] = nil,
-        [BLEED] = nil,
-        [POISON] = nil,
+        [MAGIC] = addon_root .. "ability_grimoire_dualwield_magic.dds",
+        [BLEED] = addon_root .. "ability_grimoire_dualwield_bleed.dds",
+        [POISON] = addon_root .. "ability_grimoire_dualwield_poison.dds",
         [DEFAULT] = eso_root .. "ability_grimoire_dualwield.dds"
     },
     [ULFSILDS_CONTINGENCY_ABILITYID] = {
-        [FLAME] = nil,
-        [FROST] = nil,
-        [MAGIC] = eso_root .. "ability_grimoire_magesguild.dds",
-        [DEFAULT] = nil
+        [FLAME] = addon_root .. "ability_grimoire_magesguild_flame.dds",
+        [FROST] = addon_root .. "ability_grimoire_magesguild_frost.dds",
+        [MAGIC] = addon_root .. "ability_grimoire_magesguild_magic.dds",
+        [DEFAULT] = addon_root .. "ability_grimoire_magesguild_heal.dds"
     },
     [VAULT_ABILITYID] = {
-        [FLAME] = nil,
-        [PHYSICAL] = nil,
-        [POISON] = nil,
-        [DISEASE] = nil,
+        [FLAME] = addon_root .. "ability_grimoire_bow_fire.dds",
+        [HEAL] = addon_root .. "ability_grimoire_bow_heal.dds",
+        [POISON] = addon_root .. "ability_grimoire_bow_poison.dds",
+        [DISEASE] = addon_root .. "ability_grimoire_bow_poison.dds",
         [DEFAULT] = eso_root .. "ability_grimoire_bow.dds"
     },
     [WIELD_SOUL_ABILITYID] = {
