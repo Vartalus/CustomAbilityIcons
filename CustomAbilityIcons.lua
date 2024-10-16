@@ -18,6 +18,7 @@ local SLOT_INDEX_OFFSET = 20                 -- offset for backbar abilities ind
 local COMPANION_INDEX_OFFSET = 30            -- offset for companion ultimate
 
 local ELEMENTAL_EXPLOSION_ABILITYID = 217228
+--local MENDERS_BOND_ABILITYID = 000000
 local SHIELD_THROW_ABILITYID = 222966
 local SOUL_BURST_ABILITYID = 217459
 local TORCHBEARER_ABILITYID = 217607
@@ -31,7 +32,9 @@ local FROST = "frost"
 local SHOCK = "shock"
 local MAGIC = "magic"
 local HEAL = "heal"
+local RESOURCES = "resources"
 local DISPEL = "dispel"
+local SHIELD = "shield"
 local PHYSICAL = "physical"
 local BLEED = "bleed"
 local TRAUMA = "trauma"
@@ -48,17 +51,24 @@ local custom_ability_icons = {
         [DISPEL] = addon_root .. "ability_grimoire_staffdestro_magic.dds",
         [DEFAULT] = addon_root .. "ability_grimoire_staffdestro_physical.dds"
     },
+    --[MENDERS_BOND_ABILITYID] = {
+    --    [MAGIC] = addon_root .. "ability_grimoire_staffresto_magic.dds",
+    --    [RESOURCES] = addon_root .. "ability_grimoire_staffresto_resources.dds",
+    --    [SHIELD] = addon_root .. "ability_grimoire_staffresto_shield.dds",
+    --    [DEFAULT] = eso_root .. "ability_grimoire_staffresto.dds"
+    --},
     [SHIELD_THROW_ABILITYID] = {
         [FROST] = addon_root .. "ability_grimoire_1handed_frost.dds",
         [MAGIC] = addon_root .. "ability_grimoire_1handed_magic.dds",
         [DEFAULT] = eso_root .. "ability_grimoire_1handed.dds"
     },
     [SOUL_BURST_ABILITYID] = {
-        [FROST] = nil,
-        [SHOCK] = nil,
+        [FROST] = addon_root .. "ability_grimoire_soulmagic2_frost.dds",
+        [SHOCK] = addon_root .. "ability_grimoire_soulmagic2_shock.dds",
         [MAGIC] = eso_root .. "ability_grimoire_soulmagic2.dds",
-        [PHYSICAL] = nil,
-        [DEFAULT] = nil
+        [HEAL] = addon_root .. "ability_grimoire_soulmagic2_heal.dds",
+        [SHIELD] = addon_root .. "ability_grimoire_soulmagic2_shield.dds",
+        [DEFAULT] = addon_root .. "ability_grimoire_soulmagic2_physical.dds"
     },
     [TORCHBEARER_ABILITYID] = {
         [FLAME] = eso_root .. "ability_grimoire_fightersguild.dds",
@@ -94,11 +104,12 @@ local custom_ability_icons = {
         [DEFAULT] = eso_root .. "ability_grimoire_bow.dds"
     },
     [WIELD_SOUL_ABILITYID] = {
-        [FROST] = nil,
-        [SHOCK] = nil,
+        [FROST] = addon_root .. "ability_grimoire_soulmagic1_frost.dds",
+        [SHOCK] = addon_root .. "ability_grimoire_soulmagic1_shock.dds",
         [MAGIC] = eso_root .. "ability_grimoire_soulmagic1.dds",
-        [PHYSICAL] = nil,
-        [DEFAULT] = nil
+        [HEAL] = addon_root .. "ability_grimoire_soulmagic1_heal.dds",
+        [SHIELD] = addon_root .. "ability_grimoire_soulmagic1_shield.dds",
+        [DEFAULT] = addon_root .. "ability_grimoire_soulmagic1_physical.dds"
     }
 }
 
