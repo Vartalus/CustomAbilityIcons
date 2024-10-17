@@ -33,6 +33,7 @@ local SHOCK = "shock"
 local MAGIC = "magic"
 local HEAL = "heal"
 local RESOURCES = "resources"
+local ULTIMATE = "ultimate"
 local DISPEL = "dispel"
 local SHIELD = "shield"
 local PHYSICAL = "physical"
@@ -72,9 +73,11 @@ local custom_ability_icons = {
     },
     [TORCHBEARER_ABILITYID] = {
         [FLAME] = eso_root .. "ability_grimoire_fightersguild.dds",
-        [PHYSICAL] = nil,
-        [BLEED] = nil,
-        [DEFAULT] = nil
+        [FROST] = addon_root .. "ability_grimoire_fightersguild_frost.dds",
+        [HEAL] = addon_root .. "ability_grimoire_fightersguild_heal.dds",
+        [ULTIMATE] = addon_root .. "ability_grimoire_fightersguild_ultimate.dds",
+        [BLEED] = addon_root .. "ability_grimoire_fightersguild_bleed.dds",
+        [DEFAULT] = addon_root .. "ability_grimoire_fightersguild_physical.dds"
     },
     [TRAMPLE_ABILITYID] = {
         [MAGIC] = addon_root .. "ability_grimoire_assault_magic.dds",
@@ -347,11 +350,11 @@ function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
 
         SLASH_COMMANDS["/geticons"] = function(skillIndex)
             local collectibleIcon = CustomAbilityIcons.GetSkillStyleIcon(skillIndex, nil)
-            CHAT_SYSTEM:AddMessage("Collectible Icon: " .. (collectibleIcon or ""))
-            local customIcon = CustomAbilityIcons.GetCustomAbilityIcon(slotIndex, nil)
-            CHAT_SYSTEM:AddMessage("Custom Icon: " .. (customIcon or ""))
+            CHAT_SYSTEM:AddMessage("Collectible Icon: " .. (collectibleIcon or "nil"))
+            local customIcon = CustomAbilityIcons.GetCustomAbilityIcon(skillIndex, nil)
+            CHAT_SYSTEM:AddMessage("Custom Icon: " .. (customIcon or "nil"))
             local abilityIcon = CustomAbilityIcons.GetDefaultAbilityIcon(skillIndex, nil)
-            CHAT_SYSTEM:AddMessage("Default Icon: " .. (abilityIcon or ""))
+            CHAT_SYSTEM:AddMessage("Default Icon: " .. (abilityIcon or "nil"))
         end
 
         SLASH_COMMANDS["/refreshsavedvars"] = function ()
