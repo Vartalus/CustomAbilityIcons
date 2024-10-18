@@ -35,6 +35,8 @@ local MAGIC = "magic"
 local HEAL = "heal"
 local RESOURCES = "resources"
 local ULTIMATE = "ultimate"
+local STUN = "stun"
+local IMMOBILIZE = "immobilize"
 local DISPEL = "dispel"
 local SHIELD = "shield"
 local PHYSICAL = "physical"
@@ -51,6 +53,7 @@ local custom_ability_icons = {
         [SHOCK] = addon_root .. "ability_grimoire_staffdestro_shock.dds",
         [MAGIC] = addon_root .. "ability_grimoire_staffdestro_magic.dds",
         [DISPEL] = addon_root .. "ability_grimoire_staffdestro_magic.dds",
+        [TRAUMA] = addon_root .. "ability_grimoire_staffdestro_trauma.dds",
         [DEFAULT] = addon_root .. "ability_grimoire_staffdestro_physical.dds"
     },
     [MENDERS_BOND_ABILITYID] = {
@@ -62,6 +65,7 @@ local custom_ability_icons = {
     [SHIELD_THROW_ABILITYID] = {
         [FROST] = addon_root .. "ability_grimoire_1handed_frost.dds",
         [MAGIC] = addon_root .. "ability_grimoire_1handed_magic.dds",
+        [IMMOBILIZE] = addon_root .. "ability_grimoire_1handed_magic.dds",
         [DEFAULT] = eso_root .. "ability_grimoire_1handed.dds"
     },
     [SMASH_ABILITYID] = {
@@ -76,6 +80,7 @@ local custom_ability_icons = {
         [SHOCK] = addon_root .. "ability_grimoire_soulmagic2_shock.dds",
         [MAGIC] = eso_root .. "ability_grimoire_soulmagic2.dds",
         [HEAL] = addon_root .. "ability_grimoire_soulmagic2_heal.dds",
+        [IMMOBILIZE] = eso_root .. "ability_grimoire_soulmagic2.dds",
         [SHIELD] = addon_root .. "ability_grimoire_soulmagic2_shield.dds",
         [DEFAULT] = addon_root .. "ability_grimoire_soulmagic2_physical.dds"
     },
@@ -89,7 +94,8 @@ local custom_ability_icons = {
     },
     [TRAMPLE_ABILITYID] = {
         [MAGIC] = addon_root .. "ability_grimoire_assault_magic.dds",
-        [DISPEL] = addon_root .. "ability_grimoire_assault_dispel.dds",
+        [STUN] = addon_root .. "ability_grimoire_assault_stun.dds",
+        [DISPEL] = addon_root .. "ability_grimoire_assault_magic.dds",
         [PHYSICAL] = addon_root .. "ability_grimoire_assault_physical.dds",
         [TRAUMA] = addon_root .. "ability_grimoire_assault_trauma.dds",
         [DISEASE] = addon_root .. "ability_grimoire_assault_disease.dds",
@@ -119,6 +125,7 @@ local custom_ability_icons = {
         [SHOCK] = addon_root .. "ability_grimoire_soulmagic1_shock.dds",
         [MAGIC] = eso_root .. "ability_grimoire_soulmagic1.dds",
         [HEAL] = addon_root .. "ability_grimoire_soulmagic1_heal.dds",
+        [STUN] = addon_root .. "ability_grimoire_soulmagic1_frost.dds",
         [SHIELD] = addon_root .. "ability_grimoire_soulmagic1_shield.dds",
         [DEFAULT] = addon_root .. "ability_grimoire_soulmagic1_physical.dds"
     }
