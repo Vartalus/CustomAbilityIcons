@@ -18,8 +18,9 @@ local SLOT_INDEX_OFFSET = 20                 -- offset for backbar abilities ind
 local COMPANION_INDEX_OFFSET = 30            -- offset for companion ultimate
 
 local ELEMENTAL_EXPLOSION_ABILITYID = 217228
---local MENDERS_BOND_ABILITYID = 000000
+local MENDERS_BOND_ABILITYID = 220549
 local SHIELD_THROW_ABILITYID = 222966
+local SMASH_ABILITYID = 217184
 local SOUL_BURST_ABILITYID = 217459
 local TORCHBEARER_ABILITYID = 217607
 local TRAMPLE_ABILITYID = 217663
@@ -52,16 +53,23 @@ local custom_ability_icons = {
         [DISPEL] = addon_root .. "ability_grimoire_staffdestro_magic.dds",
         [DEFAULT] = addon_root .. "ability_grimoire_staffdestro_physical.dds"
     },
-    --[MENDERS_BOND_ABILITYID] = {
-    --    [MAGIC] = addon_root .. "ability_grimoire_staffresto_magic.dds",
-    --    [RESOURCES] = addon_root .. "ability_grimoire_staffresto_resources.dds",
-    --    [SHIELD] = addon_root .. "ability_grimoire_staffresto_shield.dds",
-    --    [DEFAULT] = eso_root .. "ability_grimoire_staffresto.dds"
-    --},
+    [MENDERS_BOND_ABILITYID] = {
+        [MAGIC] = addon_root .. "ability_grimoire_staffresto_magic.dds",
+        [RESOURCES] = addon_root .. "ability_grimoire_staffresto_resources.dds",
+        [SHIELD] = addon_root .. "ability_grimoire_staffresto_shield.dds",
+        [DEFAULT] = eso_root .. "ability_grimoire_staffresto.dds"
+    },
     [SHIELD_THROW_ABILITYID] = {
         [FROST] = addon_root .. "ability_grimoire_1handed_frost.dds",
         [MAGIC] = addon_root .. "ability_grimoire_1handed_magic.dds",
         [DEFAULT] = eso_root .. "ability_grimoire_1handed.dds"
+    },
+    [SMASH_ABILITYID] = {
+        [MAGIC] = addon_root .. "ability_grimoire_2handed_magic.dds",
+        [HEAL] = addon_root .. "ability_grimoire_2handed_heal.dds",
+        [SHIELD] = addon_root .. "ability_grimoire_2handed_shield.dds",
+        [BLEED] = addon_root .. "ability_grimoire_2handed_bleed.dds",
+        [DEFAULT] = eso_root .. "ability_grimoire_2handed.dds"
     },
     [SOUL_BURST_ABILITYID] = {
         [FROST] = addon_root .. "ability_grimoire_soulmagic2_frost.dds",
