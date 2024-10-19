@@ -4,8 +4,10 @@
 ## Author: |Vartalus|r & |Iresil|r
 ## Version: 0.1
 ## AddOnVersion: 01
-## SavedVariables: CustomAbilityIcons_SavedVariables
+## SavedVariables: CustomAbilityIcons_SavedVariables CustomAbilityIcons_Globals CustomAbilityIcons_Settings
+## OptionalDependsOn: LibAddonMenu-2.0
 
 CustomAbilityIcons.lua
 Config.lua
 Util.lua
+AddonSettings.lua
