@@ -8,7 +8,6 @@ local CustomAbilityIcons = CustomAbilityIcons
 ------------------
 
 local ADDON_VERSION = "0.1"
-local SAVEDVARIABLES_VERSION = 1.1
 
 CustomAbilityIcons.version = ADDON_VERSION
 CustomAbilityIcons.name = "CustomAbilityIcons"
@@ -19,34 +18,8 @@ CustomAbilityIcons.name = "CustomAbilityIcons"
 
 --- Initializes the saved variables and replaces skill icons, if the saved variables dictate it.
 function CustomAbilityIcons.Initialize()
-    local defaults = {
-        --Icon = GetString(CUSTOM_ABILITY_ICONS),
-        version = SAVEDVARIABLES_VERSION,
-        Replace_Skill_Icons = false,
-    }
-
-    CustomAbilityIcons.SV = ZO_SavedVars:NewAccountWide("CustomAbilityIcons_SavedVariables", SAVEDVARIABLES_VERSION, nil, defaults)
-    local sv = CustomAbilityIcons_SavedVariables["Default"][GetDisplayName()]["$AccountWide"]
-    -- Clean up leftover saved variables (from previous versions)
-    for key, _ in pairs(sv) do
-        -- Delete key-value pair if the key can't also be found in the default settings (except for version)
-        if key ~= "version" and defaults[key] == nil then
-            sv[key] = nil
-        end
-    end
-
-    --- Calls RedirectTexture to replace an existing skill icon with a different one.
-    --- If you use this and you want to reverse the effect, you first need to use the /refreshsavedvars command,
-    --- and then quit the game.
-    local function replaceSkillIcons()
-        for key, value in pairs(CustomAbilityIcons.BASE_GAME_ICONS_TO_REPLACE) do
-            RedirectTexture(key, value)
-        end
-    end
-
-    if CustomAbilityIcons.SV.Replace_Skill_Icons == true then
-        replaceSkillIcons()
-    end
+    CustomAbilityIcons.InitializeSettings()
+    CustomAbilityIcons.ReplaceLowQualityIcons()
 end
 
 ------------
@@ -133,7 +106,6 @@ function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
         CustomAbilityIcons.Initialize()
     end
 end
-
 
 ----------
 -- Main --

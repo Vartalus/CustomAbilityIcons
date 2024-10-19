@@ -1,6 +1,8 @@
 --- @class (partial) CustomAbilityIcons
 local CustomAbilityIcons = CustomAbilityIcons
 
+CustomAbilityIcons.SAVEDVARIABLES_VERSION = 1.5
+
 CustomAbilityIcons.MIN_INDEX = 3                  -- First ability index
 CustomAbilityIcons.MAX_INDEX = 8                  -- Last ability: 7, Ultimate: 8
 CustomAbilityIcons.SLOT_INDEX_OFFSET = 20         -- Offset for backbar abilities indices
@@ -36,6 +38,14 @@ local DISEASE = "disease"
 
 CustomAbilityIcons.DEFAULT = "default"
 local DEFAULT = CustomAbilityIcons.DEFAULT
+
+CustomAbilityIcons.DEFAULTSETTINGS = {
+    version = CustomAbilityIcons.SAVEDVARIABLES_VERSION,
+    saveSettingsGlobally = false,
+    showSkillStyleIcons = true,
+    showCustomScribeIcons = true,
+    replaceLowQualityDefaultIcons = false
+}
 
 local ESO_ROOT = "esoui/art/icons/"
 local ADDON_ROOT = "/CustomAbilityIcons/icons/"

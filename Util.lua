@@ -48,6 +48,8 @@ end
 --- @param inactiveHotbarCategory number? If nil is passed, the active hotbar will be used. If it has a value, it is the category of the inactive hotbar.
 --- @return string? collectibleIcon The path of the icon that corresponds to the selected skill style for the requested skill. If no skill style is selected, nil will be returned.
 function CustomAbilityIcons.GetSkillStyleIcon(slotIndex, inactiveHotbarCategory)
+    if not CustomAbilityIcons.GetSettings().showSkillStyleIcons then return nil end
+
     inactiveHotbarCategory = inactiveHotbarCategory or GetActiveHotbarCategory()
     local abilityId = CustomAbilityIcons.GetAbilityId(slotIndex, inactiveHotbarCategory)
     if (abilityId or 0) == 0 then
@@ -69,6 +71,8 @@ end
 --- @param inactiveHotbarCategory number? If nil is passed, the active hotbar will be used. If it has a value, it is the category of the inactive hotbar.
 --- @return string? abilityIcon The path of the icon to be applied to the skill in question.
 function CustomAbilityIcons.GetCustomAbilityIcon(slotIndex, inactiveHotbarCategory)
+    if not CustomAbilityIcons.GetSettings().showCustomScribeIcons then return nil end
+
     local abilityId = CustomAbilityIcons.GetAbilityId(slotIndex, inactiveHotbarCategory)
     if (abilityId or 0) == 0 then
         return nil
@@ -143,6 +147,17 @@ function CustomAbilityIcons.ReplaceAbilityBarIcon(slotIndex, inactiveHotbarCateg
         local btnIcon = btn.icon
         if btnIcon then
             btnIcon:SetTexture(icon)
+        end
+    end
+end
+
+--- Calls RedirectTexture to replace an existing skill icon with a different one.
+function CustomAbilityIcons.ReplaceLowQualityIcons()
+    for key, value in pairs(CustomAbilityIcons.BASE_GAME_ICONS_TO_REPLACE) do
+        if CustomAbilityIcons.GetSettings().replaceLowQualityDefaultIcons then
+            RedirectTexture(key, value)
+        else
+            RedirectTexture(key, key)
         end
     end
 end
