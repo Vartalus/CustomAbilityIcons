@@ -7,3 +7,4 @@
 ## SavedVariables: CustomAbilityIcons_SavedVariables
 
 CustomAbilityIcons.lua
+Config.lua

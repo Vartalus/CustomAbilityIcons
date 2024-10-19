@@ -1,5 +1,7 @@
 CustomAbilityIcons = {}
-CustomAbilityIcons.name = "CustomAbilityIcons"
+
+--- @class (partial) CustomAbilityIcons
+local CustomAbilityIcons = CustomAbilityIcons
 
 ------------------
 -- Declarations --
@@ -7,129 +9,14 @@ CustomAbilityIcons.name = "CustomAbilityIcons"
 
 local ADDON_VERSION = "0.1"
 local SAVEDVARIABLES_VERSION = 1.1
-local eso_root = "esoui/art/icons/"
-local addon_root = "/CustomAbilityIcons/icons/"
 
 CustomAbilityIcons.version = ADDON_VERSION
+CustomAbilityIcons.name = "CustomAbilityIcons"
 
 local MIN_INDEX = 3                          -- first ability index
 local MAX_INDEX = 8                          -- last ability: 7, ultimate: 8
 local SLOT_INDEX_OFFSET = 20                 -- offset for backbar abilities indices
 local COMPANION_INDEX_OFFSET = 30            -- offset for companion ultimate
-
-local ELEMENTAL_EXPLOSION_ABILITYID = 217228
-local MENDERS_BOND_ABILITYID = 220549
-local SHIELD_THROW_ABILITYID = 222966
-local SMASH_ABILITYID = 217184
-local SOUL_BURST_ABILITYID = 217459
-local TORCHBEARER_ABILITYID = 217607
-local TRAMPLE_ABILITYID = 217663
-local TRAVELING_KNIFE_ABILITYID = 217872
-local ULFSILDS_CONTINGENCY_ABILITYID = 222678
-local VAULT_ABILITYID = 214960
-local WIELD_SOUL_ABILITYID = 215731
-local FLAME = "flame"
-local FROST = "frost"
-local SHOCK = "shock"
-local MAGIC = "magic"
-local HEAL = "heal"
-local RESOURCES = "resources"
-local ULTIMATE = "ultimate"
-local STUN = "stun"
-local IMMOBILIZE = "immobilize"
-local DISPEL = "dispel"
-local SHIELD = "shield"
-local PHYSICAL = "physical"
-local BLEED = "bleed"
-local TRAUMA = "trauma"
-local POISON = "poison"
-local DISEASE = "disease"
-local DEFAULT = "default"
-
-local custom_ability_icons = {
-    [ELEMENTAL_EXPLOSION_ABILITYID] = {
-        [FLAME] = eso_root .. "ability_grimoire_staffdestro.dds",
-        [FROST] = addon_root .. "ability_grimoire_staffdestro_frost.dds",
-        [SHOCK] = addon_root .. "ability_grimoire_staffdestro_shock.dds",
-        [MAGIC] = addon_root .. "ability_grimoire_staffdestro_magic.dds",
-        [DISPEL] = addon_root .. "ability_grimoire_staffdestro_magic.dds",
-        [TRAUMA] = addon_root .. "ability_grimoire_staffdestro_trauma.dds",
-        [DEFAULT] = addon_root .. "ability_grimoire_staffdestro_physical.dds"
-    },
-    [MENDERS_BOND_ABILITYID] = {
-        [MAGIC] = addon_root .. "ability_grimoire_staffresto_magic.dds",
-        [RESOURCES] = addon_root .. "ability_grimoire_staffresto_resources.dds",
-        [SHIELD] = addon_root .. "ability_grimoire_staffresto_shield.dds",
-        [DEFAULT] = eso_root .. "ability_grimoire_staffresto.dds"
-    },
-    [SHIELD_THROW_ABILITYID] = {
-        [FROST] = addon_root .. "ability_grimoire_1handed_frost.dds",
-        [MAGIC] = addon_root .. "ability_grimoire_1handed_magic.dds",
-        [IMMOBILIZE] = addon_root .. "ability_grimoire_1handed_magic.dds",
-        [DEFAULT] = eso_root .. "ability_grimoire_1handed.dds"
-    },
-    [SMASH_ABILITYID] = {
-        [MAGIC] = addon_root .. "ability_grimoire_2handed_magic.dds",
-        [HEAL] = addon_root .. "ability_grimoire_2handed_heal.dds",
-        [SHIELD] = addon_root .. "ability_grimoire_2handed_shield.dds",
-        [BLEED] = addon_root .. "ability_grimoire_2handed_bleed.dds",
-        [DEFAULT] = eso_root .. "ability_grimoire_2handed.dds"
-    },
-    [SOUL_BURST_ABILITYID] = {
-        [FROST] = addon_root .. "ability_grimoire_soulmagic2_frost.dds",
-        [SHOCK] = addon_root .. "ability_grimoire_soulmagic2_shock.dds",
-        [MAGIC] = eso_root .. "ability_grimoire_soulmagic2.dds",
-        [HEAL] = addon_root .. "ability_grimoire_soulmagic2_heal.dds",
-        [IMMOBILIZE] = eso_root .. "ability_grimoire_soulmagic2.dds",
-        [SHIELD] = addon_root .. "ability_grimoire_soulmagic2_shield.dds",
-        [DEFAULT] = addon_root .. "ability_grimoire_soulmagic2_physical.dds"
-    },
-    [TORCHBEARER_ABILITYID] = {
-        [FLAME] = eso_root .. "ability_grimoire_fightersguild.dds",
-        [FROST] = addon_root .. "ability_grimoire_fightersguild_frost.dds",
-        [HEAL] = addon_root .. "ability_grimoire_fightersguild_heal.dds",
-        [ULTIMATE] = addon_root .. "ability_grimoire_fightersguild_ultimate.dds",
-        [BLEED] = addon_root .. "ability_grimoire_fightersguild_bleed.dds",
-        [DEFAULT] = addon_root .. "ability_grimoire_fightersguild_physical.dds"
-    },
-    [TRAMPLE_ABILITYID] = {
-        [MAGIC] = addon_root .. "ability_grimoire_assault_magic.dds",
-        [STUN] = addon_root .. "ability_grimoire_assault_stun.dds",
-        [DISPEL] = addon_root .. "ability_grimoire_assault_magic.dds",
-        [PHYSICAL] = addon_root .. "ability_grimoire_assault_physical.dds",
-        [TRAUMA] = addon_root .. "ability_grimoire_assault_trauma.dds",
-        [DISEASE] = addon_root .. "ability_grimoire_assault_disease.dds",
-        [DEFAULT] = eso_root .. "ability_grimoire_assault.dds"
-    },
-    [TRAVELING_KNIFE_ABILITYID] = {
-        [MAGIC] = addon_root .. "ability_grimoire_dualwield_magic.dds",
-        [BLEED] = addon_root .. "ability_grimoire_dualwield_bleed.dds",
-        [POISON] = addon_root .. "ability_grimoire_dualwield_poison.dds",
-        [DEFAULT] = eso_root .. "ability_grimoire_dualwield.dds"
-    },
-    [ULFSILDS_CONTINGENCY_ABILITYID] = {
-        [FLAME] = addon_root .. "ability_grimoire_magesguild_flame.dds",
-        [FROST] = addon_root .. "ability_grimoire_magesguild_frost.dds",
-        [MAGIC] = addon_root .. "ability_grimoire_magesguild_magic.dds",
-        [DEFAULT] = addon_root .. "ability_grimoire_magesguild_heal.dds"
-    },
-    [VAULT_ABILITYID] = {
-        [FLAME] = addon_root .. "ability_grimoire_bow_fire.dds",
-        [HEAL] = addon_root .. "ability_grimoire_bow_heal.dds",
-        [POISON] = addon_root .. "ability_grimoire_bow_poison.dds",
-        [DISEASE] = addon_root .. "ability_grimoire_bow_poison.dds",
-        [DEFAULT] = eso_root .. "ability_grimoire_bow.dds"
-    },
-    [WIELD_SOUL_ABILITYID] = {
-        [FROST] = addon_root .. "ability_grimoire_soulmagic1_frost.dds",
-        [SHOCK] = addon_root .. "ability_grimoire_soulmagic1_shock.dds",
-        [MAGIC] = eso_root .. "ability_grimoire_soulmagic1.dds",
-        [HEAL] = addon_root .. "ability_grimoire_soulmagic1_heal.dds",
-        [STUN] = addon_root .. "ability_grimoire_soulmagic1_frost.dds",
-        [SHIELD] = addon_root .. "ability_grimoire_soulmagic1_shield.dds",
-        [DEFAULT] = addon_root .. "ability_grimoire_soulmagic1_physical.dds"
-    }
-}
 
 ---------------
 -- Functions --
@@ -218,14 +105,14 @@ end
 --- @param baseAbilityId number The base ability id to which the script has been applied.
 --- @return string? abilityIcon The path of the icon to be applied to the skill in question.
 function MapScriptToIcon(scriptName, baseAbilityId)
-    if custom_ability_icons[baseAbilityId] ~= nil then
-        for key,value in pairs(custom_ability_icons[baseAbilityId]) do
+    if CustomAbilityIcons.custom_ability_icons[baseAbilityId] ~= nil then
+        for key,value in pairs(CustomAbilityIcons.custom_ability_icons[baseAbilityId]) do
             if string.find(string.lower(scriptName), key) then
                 return value
             end
         end
 
-        return custom_ability_icons[baseAbilityId][DEFAULT]
+        return CustomAbilityIcons.custom_ability_icons[baseAbilityId][DEFAULT]
     end
 end
 
