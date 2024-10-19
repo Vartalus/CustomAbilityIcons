@@ -125,3 +125,7 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
         [DEFAULT] = ADDON_ROOT .. "ability_grimoire_soulmagic1_physical.dds"
     }
 }
+
+CustomAbilityIcons.BASE_GAME_ICONS_TO_REPLACE = {
+    [ESO_ROOT .. "ability_destructionstaff_008_b.dds"] = ADDON_ROOT .. "ability_destructionstaff_008_b.dds"
+}

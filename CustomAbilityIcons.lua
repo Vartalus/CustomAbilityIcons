@@ -34,6 +34,19 @@ function CustomAbilityIcons.Initialize()
             sv[key] = nil
         end
     end
+
+    --- Calls RedirectTexture to replace an existing skill icon with a different one.
+    --- If you use this and you want to reverse the effect, you first need to use the /refreshsavedvars command,
+    --- and then quit the game.
+    local function replaceSkillIcons()
+        for key, value in pairs(CustomAbilityIcons.BASE_GAME_ICONS_TO_REPLACE) do
+            RedirectTexture(key, value)
+        end
+    end
+
+    if CustomAbilityIcons.SV.Replace_Skill_Icons == true then
+        replaceSkillIcons()
+    end
 end
 
 ------------
