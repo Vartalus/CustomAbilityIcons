@@ -1,6 +1,11 @@
 --- @class (partial) CustomAbilityIcons
 local CustomAbilityIcons = CustomAbilityIcons
 
+CustomAbilityIcons.MIN_INDEX = 3                  -- First ability index
+CustomAbilityIcons.MAX_INDEX = 8                  -- Last ability: 7, Ultimate: 8
+CustomAbilityIcons.SLOT_INDEX_OFFSET = 20         -- Offset for backbar abilities indices
+CustomAbilityIcons.COMPANION_INDEX_OFFSET = 30    -- Offset for companion ultimate
+
 local ELEMENTAL_EXPLOSION_ABILITYID = 217228
 local MENDERS_BOND_ABILITYID = 220549
 local SHIELD_THROW_ABILITYID = 222966
@@ -29,12 +34,14 @@ local TRAUMA = "trauma"
 local POISON = "poison"
 local DISEASE = "disease"
 
-DEFAULT = "default"
+CustomAbilityIcons.DEFAULT = "default"
+local DEFAULT = CustomAbilityIcons.DEFAULT
 
 local ESO_ROOT = "esoui/art/icons/"
 local ADDON_ROOT = "/CustomAbilityIcons/icons/"
 
-CustomAbilityIcons.custom_ability_icons = {
+--- Holds all custom icon configurations for scribed skills.
+CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
     [ELEMENTAL_EXPLOSION_ABILITYID] = {
         [FLAME] = ESO_ROOT .. "ability_grimoire_staffdestro.dds",
         [FROST] = ADDON_ROOT .. "ability_grimoire_staffdestro_frost.dds",

@@ -32,7 +32,6 @@
         "ZO_ActionBar_GetButton",
         "ZO_SavedVars",
         "ZO_LinkHandler_CreateChatLink",
-        "CustomAbilityIcons_SavedVariables",
-        "DEFAULT"
+        "CustomAbilityIcons_SavedVariables"
     ]
 }
