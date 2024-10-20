@@ -12,9 +12,15 @@ function CustomAbilityIcons.GetSettings()
     end
 end
 
--- Cleanup account wide settings from previous versions.
-function CustomAbilityIcons.CleanupAccountWideSettings(savedVars, defaultConfig)
+--- Cleanup account-wide settings from previous versions.
+--- @param savedVars table Contains the current account-wide saved variables.
+--- @param defaultConfig table Contains the default account-wide saved variables.
+--- @param namespace string? The sub-table (if any) in which the saved variables are stored.
+function CustomAbilityIcons.CleanupAccountWideSettings(savedVars, defaultConfig, namespace)
     local currentConfig = savedVars["Default"][GetDisplayName()]["$AccountWide"]
+    if namespace then
+        currentConfig = currentConfig[namespace]
+    end
     for key, _ in pairs(currentConfig) do
         if key ~= "version" and defaultConfig[key] == nil then
             currentConfig[key] = nil
@@ -22,10 +28,16 @@ function CustomAbilityIcons.CleanupAccountWideSettings(savedVars, defaultConfig)
     end
 end
 
--- Cleanup character id settings from previous versions.
-function CustomAbilityIcons.CleanupCharacterIdSettings(savedVars, defaultConfig)
+--- Cleanup character id settings from previous versions.
+--- @param savedVars table Contains the current character id saved variables.
+--- @param defaultConfig table Contains the default character id saved variables.
+--- @param namespace string? The sub-table (if any) in which the saved variables are stored.
+function CustomAbilityIcons.CleanupCharacterIdSettings(savedVars, defaultConfig, namespace)
     local characterKey = GetCurrentCharacterId()
     local currentConfig = savedVars["Default"][GetDisplayName()][characterKey]
+    if namespace then
+        currentConfig = currentConfig[namespace]
+    end
     for key, _ in pairs(currentConfig) do
         if key ~= "version" and defaultConfig[key] == nil then
             currentConfig[key] = nil
@@ -36,13 +48,13 @@ end
 --- Initializes saved variables and configures their corresponding menus, using LibAddonMenu2 (if it exists).
 function CustomAbilityIcons.InitializeSettings()
     CustomAbilityIcons.CONFIG = ZO_SavedVars:NewAccountWide("CustomAbilityIcons_SavedVariables", CustomAbilityIcons.SAVEDVARIABLES_VERSION, nil, CustomAbilityIcons.DEFAULT_ADDON_CONFIG)
-    CustomAbilityIcons.CleanupAccountWideSettings(CustomAbilityIcons_SavedVariables, CustomAbilityIcons.DEFAULT_ADDON_CONFIG)
+    CustomAbilityIcons.CleanupAccountWideSettings(CustomAbilityIcons_SavedVariables, CustomAbilityIcons.DEFAULT_ADDON_CONFIG, nil)
 
     CustomAbilityIcons.GLOBALSETTINGS = ZO_SavedVars:NewAccountWide("CustomAbilityIcons_Globals", CustomAbilityIcons.SAVEDVARIABLES_VERSION, "global_settings",  CustomAbilityIcons.DEFAULT_SETTINGS)
-    --CustomAbilityIcons.CleanupAccountWideSettings(CustomAbilityIcons_Globals, CustomAbilityIcons.DEFAULT_SETTINGS)
+    CustomAbilityIcons.CleanupAccountWideSettings(CustomAbilityIcons_Globals, CustomAbilityIcons.DEFAULT_SETTINGS, "global_settings")
 
     CustomAbilityIcons.CHARACTERSETTINGS = ZO_SavedVars:NewCharacterIdSettings("CustomAbilityIcons_Settings", CustomAbilityIcons.SAVEDVARIABLES_VERSION, "character_settings", CustomAbilityIcons.DEFAULT_SETTINGS)
-    --CustomAbilityIcons.CleanupCharacterIdSettings(CustomAbilityIcons_Settings, CustomAbilityIcons.DEFAULT_SETTINGS)
+    CustomAbilityIcons.CleanupCharacterIdSettings(CustomAbilityIcons_Settings, CustomAbilityIcons.DEFAULT_SETTINGS, "character_settings")
 
     if LAM2 == nil then return end
 
