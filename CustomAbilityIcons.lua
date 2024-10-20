@@ -16,7 +16,7 @@ CustomAbilityIcons.name = "CustomAbilityIcons"
 -- Functions --
 ---------------
 
---- Initializes the saved variables and replaces skill icons, if the saved variables dictate it.
+--- Initializes the saved variables and replaces low quality skill icons, if the saved variables dictate it.
 function CustomAbilityIcons.Initialize()
     CustomAbilityIcons.InitializeSettings()
     CustomAbilityIcons.ReplaceLowQualityIcons()
@@ -66,43 +66,7 @@ function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
         -- Unregister the event as our addon was loaded and we do not need it to be run for every other addon that will load
         EVENT_MANAGER:UnregisterForEvent(CustomAbilityIcons.name, EVENT_ADD_ON_LOADED)
 
-        SLASH_COMMANDS["/getabilitydetails"] = function(skillIndex)
-            local baseAbilityId = CustomAbilityIcons.GetBaseAbilityId(skillIndex, nil)
-            CHAT_SYSTEM:AddMessage("Base Ability ID: " .. (baseAbilityId or -1))
-            local abilityId = CustomAbilityIcons.GetAbilityId(skillIndex, nil)
-            CHAT_SYSTEM:AddMessage("Ability ID: " .. (abilityId or -1))
-
-            local primaryScriptId, secondaryScriptId, tertiaryScriptId = GetCraftedAbilityActiveScriptIds(abilityId)
-            local scriptLink = ""
-            if primaryScriptId ~= 0 or secondaryScriptId ~= 0 or tertiaryScriptId ~= 0 then
-                CHAT_SYSTEM:AddMessage("Focus Script: " .. GetCraftedAbilityScriptDisplayName(primaryScriptId) .. "(" .. primaryScriptId .. ")")
-                CHAT_SYSTEM:AddMessage("Signature Script: " .. GetCraftedAbilityScriptDisplayName(secondaryScriptId) .. "(" .. secondaryScriptId .. ")")
-                CHAT_SYSTEM:AddMessage("Affix Script: " .. GetCraftedAbilityScriptDisplayName(tertiaryScriptId) .. "(" .. tertiaryScriptId .. ")")
-                if primaryScriptId ~= 0 and secondaryScriptId ~= 0 and tertiaryScriptId ~= 0 then
-                    scriptLink = ZO_LinkHandler_CreateChatLink(GetCraftedAbilityLink, abilityId, primaryScriptId, secondaryScriptId, tertiaryScriptId)
-                    CHAT_SYSTEM:AddMessage("Scribed Skill Link: " .. scriptLink)
-                end
-            end
-        end
-
-        SLASH_COMMANDS["/geticons"] = function(skillIndex)
-            local collectibleIcon = CustomAbilityIcons.GetSkillStyleIcon(skillIndex, nil)
-            CHAT_SYSTEM:AddMessage("Collectible Icon: " .. (collectibleIcon or "nil"))
-            local customIcon = CustomAbilityIcons.GetCustomAbilityIcon(skillIndex, nil)
-            CHAT_SYSTEM:AddMessage("Custom Icon: " .. (customIcon or "nil"))
-            local abilityIcon = CustomAbilityIcons.GetDefaultAbilityIcon(skillIndex, nil)
-            CHAT_SYSTEM:AddMessage("Default Icon: " .. (abilityIcon or "nil"))
-        end
-
-        SLASH_COMMANDS["/refreshsavedvars"] = function ()
-            local sv = CustomAbilityIcons_SavedVariables["Default"][GetDisplayName()]["$AccountWide"]
-            for key, _ in pairs(sv) do
-                sv[key] = nil
-            end
-
-            CustomAbilityIcons.Initialize()
-        end
-
+        CustomAbilityIcons.CreateSlashCommands()
         CustomAbilityIcons.Initialize()
     end
 end

@@ -1,4 +1,4 @@
-## Title: |c7f7f7fCustom|cada684AbilityIcons|r v0.01
+## Title: |c7f7f7fCustom|cada684AbilityIcons|r v0.1
 ## Description: The Custom Ability Icons ESO addon changes the ability icons with custom selections.
 ## APIVersion: 101039 101040
 ## Author: |Vartalus|r & |Iresil|r
@@ -11,3 +11,4 @@ CustomAbilityIcons.lua
 Config.lua
 Util.lua
 AddonSettings.lua
+SlashCommands.lua
