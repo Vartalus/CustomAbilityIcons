@@ -39,9 +39,13 @@ local DISEASE = "disease"
 CustomAbilityIcons.DEFAULT = "default"
 local DEFAULT = CustomAbilityIcons.DEFAULT
 
-CustomAbilityIcons.DEFAULTSETTINGS = {
+CustomAbilityIcons.DEFAULT_ADDON_CONFIG = {
     version = CustomAbilityIcons.SAVEDVARIABLES_VERSION,
     saveSettingsGlobally = false,
+}
+
+CustomAbilityIcons.DEFAULT_SETTINGS = {
+    version = CustomAbilityIcons.SAVEDVARIABLES_VERSION,
     showSkillStyleIcons = true,
     showCustomScribeIcons = true,
     replaceLowQualityDefaultIcons = false

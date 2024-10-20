@@ -5,36 +5,44 @@ local LAM2 = LibAddonMenu2
 
 --- Retrieves the saved settings, whether global or per character (and the default settings if nothing was previously saved).
 function CustomAbilityIcons.GetSettings()
-	if CustomAbilityIcons.GLOBALSETTINGS and CustomAbilityIcons.GLOBALSETTINGS.saveSettingsGlobally then
-		return CustomAbilityIcons.GLOBALSETTINGS
+	if CustomAbilityIcons.CONFIG and CustomAbilityIcons.CONFIG.saveSettingsGlobally then
+		return CustomAbilityIcons.GLOBALSETTINGS or CustomAbilityIcons.DEFAULT_SETTINGS
 	else
-        if CustomAbilityIcons.CHARACTERSETTINGS then
-		    return CustomAbilityIcons.CHARACTERSETTINGS
-        else
-            return CustomAbilityIcons.DEFAULTSETTINGS
-	    end
+        return CustomAbilityIcons.CHARACTERSETTINGS or CustomAbilityIcons.DEFAULT_SETTINGS
+    end
+end
+
+-- Cleanup account wide settings from previous versions.
+function CustomAbilityIcons.CleanupAccountWideSettings(savedVars, defaultConfig)
+    local currentConfig = savedVars["Default"][GetDisplayName()]["$AccountWide"]
+    for key, _ in pairs(currentConfig) do
+        if key ~= "version" and defaultConfig[key] == nil then
+            currentConfig[key] = nil
+        end
+    end
+end
+
+-- Cleanup character id settings from previous versions.
+function CustomAbilityIcons.CleanupCharacterIdSettings(savedVars, defaultConfig)
+    local characterKey = GetCurrentCharacterId()
+    local currentConfig = savedVars["Default"][GetDisplayName()][characterKey]
+    for key, _ in pairs(currentConfig) do
+        if key ~= "version" and defaultConfig[key] == nil then
+            currentConfig[key] = nil
+        end
     end
 end
 
 --- Initializes saved variables and configures their corresponding menus, using LibAddonMenu2 (if it exists).
 function CustomAbilityIcons.InitializeSettings()
-    local defaults = {
-        --Icon = GetString(CUSTOM_ABILITY_ICONS),
-        version = CustomAbilityIcons.SAVEDVARIABLES_VERSION
-    }
+    CustomAbilityIcons.CONFIG = ZO_SavedVars:NewAccountWide("CustomAbilityIcons_SavedVariables", CustomAbilityIcons.SAVEDVARIABLES_VERSION, nil, CustomAbilityIcons.DEFAULT_ADDON_CONFIG)
+    CustomAbilityIcons.CleanupAccountWideSettings(CustomAbilityIcons_SavedVariables, CustomAbilityIcons.DEFAULT_ADDON_CONFIG)
 
-    CustomAbilityIcons.SV = ZO_SavedVars:NewAccountWide("CustomAbilityIcons_SavedVariables", CustomAbilityIcons.SAVEDVARIABLES_VERSION, nil, defaults)
-    local sv = CustomAbilityIcons_SavedVariables["Default"][GetDisplayName()]["$AccountWide"]
-    -- Clean up leftover saved variables (from previous versions)
-    for key, _ in pairs(sv) do
-        -- Delete key-value pair if the key can't also be found in the default settings (except for version)
-        if key ~= "version" and defaults[key] == nil then
-            sv[key] = nil
-        end
-    end
+    CustomAbilityIcons.GLOBALSETTINGS = ZO_SavedVars:NewAccountWide("CustomAbilityIcons_Globals", CustomAbilityIcons.SAVEDVARIABLES_VERSION, "global_settings",  CustomAbilityIcons.DEFAULT_SETTINGS)
+    --CustomAbilityIcons.CleanupAccountWideSettings(CustomAbilityIcons_Globals, CustomAbilityIcons.DEFAULT_SETTINGS)
 
-    CustomAbilityIcons.GLOBALSETTINGS = ZO_SavedVars:NewAccountWide("CustomAbilityIcons_Globals", CustomAbilityIcons.SAVEDVARIABLES_VERSION, "global_settings",  CustomAbilityIcons.DEFAULTSETTINGS)
-    CustomAbilityIcons.CHARACTERSETTINGS = ZO_SavedVars:NewCharacterIdSettings("CustomAbilityIcons_Settings", CustomAbilityIcons.SAVEDVARIABLES_VERSION, "character_settings", CustomAbilityIcons.DEFAULTSETTINGS)
+    CustomAbilityIcons.CHARACTERSETTINGS = ZO_SavedVars:NewCharacterIdSettings("CustomAbilityIcons_Settings", CustomAbilityIcons.SAVEDVARIABLES_VERSION, "character_settings", CustomAbilityIcons.DEFAULT_SETTINGS)
+    --CustomAbilityIcons.CleanupCharacterIdSettings(CustomAbilityIcons_Settings, CustomAbilityIcons.DEFAULT_SETTINGS)
 
     if LAM2 == nil then return end
 
@@ -59,9 +67,9 @@ function CustomAbilityIcons.InitializeSettings()
         {
             type = "checkbox",
             name = "Use same settings for all characters?",
-            getFunc = function() return CustomAbilityIcons.GLOBALSETTINGS.saveSettingsGlobally end,
+            getFunc = function() return CustomAbilityIcons.CONFIG.saveSettingsGlobally end,
             setFunc = function(value)
-                CustomAbilityIcons.GLOBALSETTINGS.saveSettingsGlobally = value
+                CustomAbilityIcons.CONFIG.saveSettingsGlobally = value
             end
         },
         {
