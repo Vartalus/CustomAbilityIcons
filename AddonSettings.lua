@@ -78,7 +78,7 @@ function CustomAbilityIcons.InitializeSettings()
         },
         {
             type = "checkbox",
-            name = "Use same settings for all characters?",
+            name = "Use the same settings for all characters",
             getFunc = function() return CustomAbilityIcons.CONFIG.saveSettingsGlobally end,
             setFunc = function(value)
                 CustomAbilityIcons.CONFIG.saveSettingsGlobally = value
@@ -86,7 +86,7 @@ function CustomAbilityIcons.InitializeSettings()
         },
         {
             type = "checkbox",
-            name = "Use Skill Style Icons on ability bar?",
+            name = "Use Skill Style Icons on ability bar",
             getFunc = function() return CustomAbilityIcons:GetSettings().showSkillStyleIcons end,
             setFunc = function(value)
                 CustomAbilityIcons:GetSettings().showSkillStyleIcons = value
@@ -95,7 +95,7 @@ function CustomAbilityIcons.InitializeSettings()
         },
         {
             type = "checkbox",
-            name = "Use Custom Scribed Ability Icons on ability bar?",
+            name = "Use Custom Scribed Ability Icons on ability bar",
             getFunc = function() return CustomAbilityIcons:GetSettings().showCustomScribeIcons end,
             setFunc = function(value)
                 CustomAbilityIcons:GetSettings().showCustomScribeIcons = value
@@ -104,7 +104,7 @@ function CustomAbilityIcons.InitializeSettings()
         },
         {
             type = "checkbox",
-            name = "Replace low quality Default Ability Icons?",
+            name = "Replace low quality Default Ability Icons",
             getFunc = function() return CustomAbilityIcons:GetSettings().replaceLowQualityDefaultIcons end,
             setFunc = function(value)
                 CustomAbilityIcons:GetSettings().replaceLowQualityDefaultIcons = value
