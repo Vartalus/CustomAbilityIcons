@@ -1,9 +1,9 @@
-## Title: |c7f7f7fCustom|cada684AbilityIcons|r v0.1
+## Title: |c722cd4Custom|r |cebd991Ability Icons|r v1.0
 ## Description: The Custom Ability Icons ESO addon changes the ability icons with custom selections.
 ## APIVersion: 101039 101040
-## Author: |Vartalus|r & |Iresil|r
-## Version: 0.1
-## AddOnVersion: 01
+## Author: |ce6202dVartalus|r & |c0ed5f0Iresil|r
+## Version: 1.0
+## AddOnVersion: 0100
 ## SavedVariables: CustomAbilityIcons_SavedVariables CustomAbilityIcons_Globals CustomAbilityIcons_Settings
 ## OptionalDependsOn: LibAddonMenu-2.0
 
