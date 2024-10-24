@@ -36,7 +36,7 @@ _(This only applies to the **Pulsar** morph of the Destruction Staff skill **Imp
 ### Scribed Skills
 One icon from each set has been configured as the default for that skill (based on the most often encountered color for the skill's possible Focus Scripts). In some cases the default icon is a new one and in some cases the default icon is the base skill icon.
 
-**Elemental Explosion** (default is _physical_)
+**Elemental Explosion** (default is _physical_, _flame_ uses the default icon)
 
 ![Elemental Explosion (Frost)](images/ability_grimoire_staffdestro_frost.png "Elemental Explosion (Frost)")
 ![Elemental Explosion (Shock)](images/ability_grimoire_staffdestro_shock.png "Elemental Explosion (Shock)")
@@ -49,6 +49,69 @@ One icon from each set has been configured as the default for that skill (based 
 ![Mender's Bond (Magic)](images/ability_grimoire_staffresto_magic.png "Mender's Bond (Magic)")
 ![Mender's Bond (Resource Restoration)](images/ability_grimoire_staffresto_resources.png "Mender's Bond (Resource Restoration)")
 ![Mender's Bond (Shield)](images/ability_grimoire_staffresto_shield.png "Mender's Bond (Shield)")
+
+**Shield Throw** (default is _base skill icon_)
+
+![Shield Throw (Frost)](images/ability_grimoire_1handed_frost.png "Shield Throw (Frost)")
+![Shield Throw (Magic & Immobilize)](images/ability_grimoire_1handed_magic.png "Shield Throw (Magic & Immobilize)")
+
+**Smash** (default is _base skill icon_)
+
+![Smash (Magic)](images/ability_grimoire_2handed_magic.png "Smash (Magic)")
+![Smash (Heal)](images/ability_grimoire_2handed_heal.png "Smash (Heal)")
+![Smash (Shield)](images/ability_grimoire_2handed_shield.png "Smash (Shield)")
+![Smash (Bleed)](images/ability_grimoire_2handed_bleed.png "Smash (Bleed)")
+
+**Soul Burst** (default is _physical_, _magic_ and _immobilize_ use the base icon)
+
+![Smash (Frost)](images/ability_grimoire_soulmagic2_frost.png "Smash (Frost)")
+![Smash (Shock)](images/ability_grimoire_soulmagic2_shock.png "Smash (Shock)")
+![Smash (Heal)](images/ability_grimoire_soulmagic2_heal.png "Smash (Heal)")
+![Smash (Shield)](images/ability_grimoire_soulmagic2_shield.png "Smash (Shield)")
+|![Smash (Physical)](images/ability_grimoire_soulmagic2_physical.png "Smash (Physical)")|
+
+**Torchbearer** (default is _physical_, _flame_ uses the base icon)
+
+![Torchbearer (Frost)](images/ability_grimoire_fightersguild_frost.png "Torchbearer (Frost)")
+![Torchbearer (Heal)](images/ability_grimoire_fightersguild_heal.png "Torchbearer (Heal)")
+![Torchbearer (Ultimate)](images/ability_grimoire_fightersguild_ultimate.png "Torchbearer (Ultimate)")
+![Torchbearer (Bleed)](images/ability_grimoire_fightersguild_bleed.png "Torchbearer (Bleed)")
+|![Torchbearer (Physical)](images/ability_grimoire_fightersguild_physical.png "Torchbearer (Physical)")|
+
+**Trample** (default is _base skill icon_)
+
+![Trample (Magic & Dispel)](images/ability_grimoire_assault_magic.png "Trample (Magic & Dispel)")
+![Trample (Stun)](images/ability_grimoire_assault_stun.png "Trample (Stun)")
+![Trample (Physical)](images/ability_grimoire_assault_physical.png "Trample (Physical)")
+![Trample (Trauma)](images/ability_grimoire_assault_trauma.png "Trample (Trauma)")
+![Trample (Disease)](images/ability_grimoire_assault_disease.png "Trample (Disease)")
+
+**Traveling Knife** (default is _base skill icon_)
+
+![Traveling Knife (Magic)](images/ability_grimoire_dualwield_magic.png "Traveling Knife (Magic)")
+![Traveling Knife (Bleed)](images/ability_grimoire_dualwield_bleed.png "Traveling Knife (Bleed)")
+![Traveling Knife (Poison)](images/ability_grimoire_dualwield_poison.png "Traveling Knife (Poison)")
+
+**Ulfsild's Contingency** (default is _heal_)
+
+![Ulfsild's Contingency (Flame)](images/ability_grimoire_magesguild_flame.png "Ulfsild's Contingency (Flame)")
+![Ulfsild's Contingency (Frost)](images/ability_grimoire_magesguild_frost.png "Ulfsild's Contingency (Frost)")
+![Ulfsild's Contingency (Magic)](images/ability_grimoire_magesguild_magic.png "Ulfsild's Contingency (Magic)")
+|![Ulfsild's Contingency (Heal)](images/ability_grimoire_magesguild_heal.png "Ulfsild's Contingency (Heal)")|
+
+**Vault** (default is _base skill icon_)
+
+![Vault (Flame)](images/ability_grimoire_bow_fire.png "Vault (Flame)")
+![Vault (Heal)](images/ability_grimoire_bow_heal.png "Vault (Heal)")
+![Vault (Poison & Disease)](images/ability_grimoire_bow_poison.png "Vault (Poison & Disease)")
+
+**Wield Soul** (default is _physical_, _magic_ uses the base icon)
+
+![Wield Soul (Frost & Stun)](images/ability_grimoire_soulmagic1_frost.png "Wield Soul (Frost & Stun)")
+![Wield Soul (Shock)](images/ability_grimoire_soulmagic1_shock.png "Wield Soul (Shock)")
+![Wield Soul (Heal)](images/ability_grimoire_soulmagic1_heal.png "Wield Soul (Heal)")
+![Wield Soul (Shield)](images/ability_grimoire_soulmagic1_shield.png "Wield Soul (Shield)")
+|![Wield Soul (Physical)](images/ability_grimoire_soulmagic1_physical.png "Wield Soul (Physical)")|
 
 ### Base Game Skills
 **Pulsar (Frost)**
