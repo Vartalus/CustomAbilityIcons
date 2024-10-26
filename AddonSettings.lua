@@ -79,15 +79,23 @@ function CustomAbilityIcons.InitializeSettings()
         {
             type = "checkbox",
             name = "Use the same settings for all characters",
-            getFunc = function() return CustomAbilityIcons.CONFIG.saveSettingsGlobally end,
+            getFunc = function()
+                return CustomAbilityIcons.CONFIG.saveSettingsGlobally
+            end,
             setFunc = function(value)
+                local oldSettings = CustomAbilityIcons:GetSettings()
                 CustomAbilityIcons.CONFIG.saveSettingsGlobally = value
+                CustomAbilityIcons:GetSettings().showSkillStyleIcons = oldSettings.showSkillStyleIcons
+                CustomAbilityIcons:GetSettings().showCustomScribeIcons = oldSettings.showCustomScribeIcons
+                CustomAbilityIcons:GetSettings().replaceMismatchedBaseIcons = oldSettings.replaceMismatchedBaseIcons
             end
         },
         {
             type = "checkbox",
             name = "Use Skill Style Icons on ability bar",
-            getFunc = function() return CustomAbilityIcons:GetSettings().showSkillStyleIcons end,
+            getFunc = function()
+                return CustomAbilityIcons:GetSettings().showSkillStyleIcons
+            end,
             setFunc = function(value)
                 CustomAbilityIcons:GetSettings().showSkillStyleIcons = value
                 CustomAbilityIcons.OnCollectibleUpdated()
@@ -96,7 +104,9 @@ function CustomAbilityIcons.InitializeSettings()
         {
             type = "checkbox",
             name = "Use Custom Scribed Ability Icons on ability bar",
-            getFunc = function() return CustomAbilityIcons:GetSettings().showCustomScribeIcons end,
+            getFunc = function()
+                return CustomAbilityIcons:GetSettings().showCustomScribeIcons
+            end,
             setFunc = function(value)
                 CustomAbilityIcons:GetSettings().showCustomScribeIcons = value
                 CustomAbilityIcons.OnCollectibleUpdated()
@@ -105,7 +115,9 @@ function CustomAbilityIcons.InitializeSettings()
         {
             type = "checkbox",
             name = "Replace mismatched Base Ability Icons",
-            getFunc = function() return CustomAbilityIcons:GetSettings().replaceMismatchedBaseIcons end,
+            getFunc = function()
+                return CustomAbilityIcons:GetSettings().replaceMismatchedBaseIcons
+            end,
             setFunc = function(value)
                 CustomAbilityIcons:GetSettings().replaceMismatchedBaseIcons = value
                 CustomAbilityIcons.ReplaceMismatchedIcons()
