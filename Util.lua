@@ -152,9 +152,9 @@ function CustomAbilityIcons.ReplaceAbilityBarIcon(slotIndex, inactiveHotbarCateg
 end
 
 --- Calls RedirectTexture to replace an existing skill icon with a different one.
-function CustomAbilityIcons.ReplaceLowQualityIcons()
+function CustomAbilityIcons.ReplaceMismatchedIcons()
     for key, value in pairs(CustomAbilityIcons.BASE_GAME_ICONS_TO_REPLACE) do
-        if CustomAbilityIcons.GetSettings().replaceLowQualityDefaultIcons then
+        if CustomAbilityIcons.GetSettings().replaceMismatchedBaseIcons then
             RedirectTexture(key, value)
         else
             RedirectTexture(key, key)

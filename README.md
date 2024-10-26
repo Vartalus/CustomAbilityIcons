@@ -14,19 +14,19 @@ If LibAddonMenu is enabled, the following settings screen will be available via 
 ![Settings](images/LibAddonMenu_Settings.png "Settings")
 
 The available options are the following:
-> Use the same settings for all characters
+### Use the same settings for all characters
 - **ON:** Any selections you make from the three options below will apply to all characters on your account (on both NA and EU servers).
 - **OFF:** Any selections you make from the three options below will only apply to the character you're logged in as. You'll need to set these separately for all other characters.
 
-> Use Skill Style Icons on ability bar
+### Use Skill Style Icons on ability bar
 - **ON:** When a skill style is applied to an equipped active skill, the skill style icon _will_ appear as the skill's icon on your ability bar.
 - **OFF:** When a skill style is applied to an equipped active skill, the skill style icon _will not_ appear on your ability bar.
 
-> Use Custom Scribed Ability Icons on ability bar
+### Use Custom Scribed Ability Icons on ability bar
 - **ON:** When a scribed skill is equipped on your ability bar, a _recolored_ version of the base skill icon will be displayed on your ability bar. The icon colors have been selected based on each skill's visual effects, while also trying to preserve consistency with the existing skills.
 - **OFF:** When a scribed skill is equipped on your ability bar, only the _base_ skill icon will be displayed.
 
-> Replace low quality Default Ability Icons
+### Replace mismatched Base Ability Icons
 
 _(This only applies to the **Pulsar** morph of the Destruction Staff skill **Impulse**, for the time being)_
 - **ON:** A new icon will be displayed if you have a Frost Staff equipped.

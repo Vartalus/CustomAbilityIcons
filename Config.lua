@@ -48,7 +48,7 @@ CustomAbilityIcons.DEFAULT_SETTINGS = {
     version = CustomAbilityIcons.SAVEDVARIABLES_VERSION,
     showSkillStyleIcons = true,
     showCustomScribeIcons = true,
-    replaceLowQualityDefaultIcons = false
+    replaceMismatchedBaseIcons = false
 }
 
 local ESO_ROOT = "esoui/art/icons/"

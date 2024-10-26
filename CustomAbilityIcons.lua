@@ -16,10 +16,10 @@ CustomAbilityIcons.name = "CustomAbilityIcons"
 -- Functions --
 ---------------
 
---- Initializes the saved variables and replaces low quality skill icons, if the saved variables dictate it.
+--- Initializes the saved variables and replaces mismatched base skill icons, if the saved variables dictate it.
 function CustomAbilityIcons.Initialize()
     CustomAbilityIcons.InitializeSettings()
-    CustomAbilityIcons.ReplaceLowQualityIcons()
+    CustomAbilityIcons.ReplaceMismatchedIcons()
 end
 
 ------------

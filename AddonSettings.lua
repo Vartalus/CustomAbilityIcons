@@ -104,11 +104,11 @@ function CustomAbilityIcons.InitializeSettings()
         },
         {
             type = "checkbox",
-            name = "Replace low quality Default Ability Icons",
-            getFunc = function() return CustomAbilityIcons:GetSettings().replaceLowQualityDefaultIcons end,
+            name = "Replace mismatched Base Ability Icons",
+            getFunc = function() return CustomAbilityIcons:GetSettings().replaceMismatchedBaseIcons end,
             setFunc = function(value)
-                CustomAbilityIcons:GetSettings().replaceLowQualityDefaultIcons = value
-                CustomAbilityIcons.ReplaceLowQualityIcons()
+                CustomAbilityIcons:GetSettings().replaceMismatchedBaseIcons = value
+                CustomAbilityIcons.ReplaceMismatchedIcons()
             end
         }
     }
