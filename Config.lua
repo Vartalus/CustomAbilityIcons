@@ -123,7 +123,7 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
         [DEFAULT] = ADDON_ROOT .. "ability_grimoire_magesguild_heal.dds"
     },
     [VAULT_ABILITYID] = {
-        [FLAME] = ADDON_ROOT .. "ability_grimoire_bow_fire.dds",
+        [FLAME] = ADDON_ROOT .. "ability_grimoire_bow_flame.dds",
         [HEAL] = ADDON_ROOT .. "ability_grimoire_bow_heal.dds",
         [POISON] = ADDON_ROOT .. "ability_grimoire_bow_poison.dds",
         [DISEASE] = ADDON_ROOT .. "ability_grimoire_bow_poison.dds",
