@@ -34,7 +34,12 @@ _(This only applies to the **Pulsar** morph of the Destruction Staff skill **Imp
 
 ## New Icons
 ### Scribed Skills
-One icon from each set has been configured as the default for that skill (based on the most often encountered color for the skill's possible Focus Scripts). In some cases the default icon is a new one and in some cases the default icon is the base skill icon.
+The following table contains a mapping of newly added (and base) icons to the corresponding Focus Script effect, per scribed skill. New icons have been created based on the visual effect colors added by each skill's possible Focus Scripts. One icon from each set has been configured as the default for that skill (based on the most often encountered color for the skill's possible Focus Script effects). In some cases the default icon is a new one and in some cases the default icon is the base skill icon.
+
+> [!NOTE]
+> **Torchbearer**: You can't use a Frost Damage focus script on Torchbearer, but it looked cool and one can only hope.
+>
+> **Ulfsild's Contingency**: Even though the base game icon looked nice, it wasn't consistent with the focus script visual effects. So it has been completely replaced by the new ones.
 
 | Skill | &nbsp;&nbsp;Flame&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;Frost&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;Shock&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;Magic&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;Heal&nbsp;&nbsp;&nbsp; | Resources&nbsp; | &nbsp;Ultimate&nbsp; | &nbsp;&nbsp;&nbsp;Stun&nbsp;&nbsp;&nbsp; | Immobilize | &nbsp;&nbsp;Dispel&nbsp;&nbsp; | &nbsp;&nbsp;Shield&nbsp;&nbsp; | &nbsp;Physical&nbsp; | &nbsp;&nbsp;Bleed&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;Trauma&nbsp;&nbsp; | &nbsp;&nbsp;Poison&nbsp;&nbsp; | &nbsp;Disease&nbsp;&nbsp; | &nbsp;Default&nbsp;&nbsp; |
 | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
