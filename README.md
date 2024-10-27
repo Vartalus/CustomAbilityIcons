@@ -13,7 +13,6 @@ This addon can use (but does not rely on) [**LibAddonMenu-2.0**](https://www.eso
 If LibAddonMenu is enabled, the following settings screen will be available via *Settings -> Addons -> Custom Ability Icons*.
 ![Settings](images/LibAddonMenu_Settings.png "Settings")
 
-The available options are the following:
 ### Use the same settings for all characters
 - **ON:** Any selections you make from the three options below will apply to all characters on your account (on both NA and EU servers).
 - **OFF:** Any selections you make from the three options below will only apply to the character you're logged in as. You'll need to set these separately for all other characters.
@@ -28,7 +27,7 @@ The available options are the following:
 
 ### Replace mismatched Base Ability Icons
 
-_(This only applies to the **Pulsar** morph of the Destruction Staff skill **Impulse**, for the time being)_
+_(This only applies to the frost version of the **Pulsar** morph of the Destruction Staff skill **Impulse**, for the time being)_
 - **ON:** A new icon will be displayed if you have a Frost Staff equipped.
 - **OFF:** The default icon will be displayed regardless of the type of staff you're using.
 
@@ -61,3 +60,18 @@ The following table contains a mapping of newly added (and base) icons to the co
 | Skill | Old Icon | New Icon |
 | --- | --- | --- |
 | Pulsar | ![Pulsar](images/ability_destructionstaff_008_b_old.png "Pulsar") | ![Pulsar (Frost)](images/ability_destructionstaff_008_b.png "Pulsar (Frost)")
+
+## How It Works
+This addon assumes that ESO skills comply with the structure displayed in the following diagram:
+
+![Skill Trees](images/Skill_Trees.drawio.png "Skill Trees")
+
+What the above means is that unmorphed skills exist on the same level as the base scribed skills (i.e. the scribed skill "foundation" on which the actual skill is built, after the scripts are added to it). It also means that every scribed skill flavor exists on the same level as morphed skills.
+
+Assuming the above, the actions taken by this addon are applied in the following order:
+
+**[A]** If any skill styles are selected for a slotted skill, the default skill icon gets replaced by the skill style icon _(provided that the corresponding setting has been selected)_. This can apply to both normal and scribed skills (even though no skill styles for scribed skills exist at the moment). This icon is always a version of the unmorphed skill icon and there aren't any different icons for morphed skills or scribed skill flavors.
+
+**[B]** If a scribed skill is slotted and no skill styles are selected for it (that's always the case for the time being), then a custom icon is selected, based on the focus script that has been used during scribing _(provided that the corresponding setting has been selected)_.
+
+**[C]** If none of the above conditions apply, the base skill icon may get replaced by a new one, if the original skill icon is deemed "mismatched" _(provided that the corresponding setting has been selected)_. Currently, this applies only to the frost version of the **Pulsar** morph of the Destruction Staff skill **Impulse**.
