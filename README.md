@@ -10,7 +10,9 @@ This addon affects the following areas:
 ## Customization
 This addon can use (but does not rely on) [**LibAddonMenu-2.0**](https://www.esoui.com/downloads/info7-LibAddonMenu-2.0.html) for customizing its in-game settings.
 
-If LibAddonMenu is enabled, the following settings screen will be available via *Settings -> Addons -> Custom Ability Icons*.
+If LibAddonMenu is enabled, the following settings screen will be available via
+> *Settings -> Addons -> Custom Ability Icons*.
+
 ![Settings](images/LibAddonMenu_Settings.png "Settings")
 
 ### Use the same settings for all characters
