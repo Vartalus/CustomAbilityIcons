@@ -10,6 +10,14 @@ This addon affects the following areas:
 ## Customization
 This addon can use (but does not rely on) [**LibAddonMenu-2.0**](https://www.esoui.com/downloads/info7-LibAddonMenu-2.0.html) for customizing its in-game settings.
 
+> [!IMPORTANT]
+> If LibAddonMenu is not enabled, each one of the available settings will only be accessible via its corresponding chat command. All chat commands can accept the following as inputs:
+> - **on** (or **off**)
+> - **true** (or **false**)
+> - **1** (or **0**)
+>
+> Using any of these input combinations enables (or disables) the corresponding setting.
+
 If LibAddonMenu is enabled, the following settings screen will be available via
 > *Settings -> Addons -> Custom Ability Icons*.
 
@@ -19,19 +27,43 @@ If LibAddonMenu is enabled, the following settings screen will be available via
 - **ON:** Any selections you make from the three options below will apply to all characters on your account (on both NA and EU servers).
 - **OFF:** Any selections you make from the three options below will only apply to the character you're logged in as. You'll need to set these separately for all other characters.
 
+> [!TIP]
+> This can also be enabled using:
+> ```
+> /setoptionglobalicons on
+> ```
+
 ### Use Skill Style Icons on ability bar
 - **ON:** When a skill style is applied to an equipped active skill, the skill style icon _will_ appear as the skill's icon on your ability bar.
 - **OFF:** When a skill style is applied to an equipped active skill, the skill style icon _will not_ appear on your ability bar.
 
+> [!TIP]
+> This can also be enabled using:
+> ```
+> /setoptionskillstyleicons on
+> ```
+
 ### Use Custom Scribed Ability Icons on ability bar
 - **ON:** When a scribed skill is equipped on your ability bar, a _recolored_ version of the base skill icon will be displayed on your ability bar. The icon colors have been selected based on each skill's visual effects, while also trying to preserve consistency with the existing skills.
 - **OFF:** When a scribed skill is equipped on your ability bar, only the _base_ skill icon will be displayed.
+
+> [!TIP]
+> This can also be enabled using:
+> ```
+> /setoptioncustomicons on
+> ```
 
 ### Replace mismatched Base Ability Icons
 
 _(This only applies to the frost version of the **Pulsar** morph of the Destruction Staff skill **Impulse**, for the time being)_
 - **ON:** A new icon will be displayed if you have a Frost Staff equipped.
 - **OFF:** The default icon will be displayed regardless of the type of staff you're using.
+
+> [!TIP]
+> This can also be enabled using:
+> ```
+> /setoptionmismatchedicons on
+> ```
 
 ## New Icons
 ### Scribed Skills
