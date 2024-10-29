@@ -6,6 +6,10 @@ function CustomAbilityIcons.CreateSlashCommands()
     CustomAbilityIcons.CreateGetAbilityDetailsCommand()
     CustomAbilityIcons.CreateGetIconsCommand()
     CustomAbilityIcons.CreteGetSavedVarsCommand()
+    CustomAbilityIcons.CreateSetOptionGlobalIconsCommand()
+    CustomAbilityIcons.CreateSetOptionSkillStyleIconsCommand()
+    CustomAbilityIcons.CreateSetOptionCustomIconsCommand()
+    CustomAbilityIcons.CreateSetOptionMismatchedIconsCommand()
 end
 
 --- Creates the /getabilitydetails command, to retrieve details about the ability found at a specified slot.
@@ -70,5 +74,57 @@ function CustomAbilityIcons.CreteGetSavedVarsCommand()
         end
 
         CHAT_SYSTEM:AddMessage("----------------------------------")
+    end
+end
+
+--- Creates the /setoptionglobalicons command, to change the display setting for global (Account Wide) Icons
+function CustomAbilityIcons.CreateSetOptionGlobalIconsCommand()
+    SLASH_COMMANDS["/setoptionglobalicons"] = function(option)
+        if string.lower(option) == "false" or option == "0" or string.lower(option) == "off" then
+            CustomAbilityIcons.SetOptionGlobalIcons(false)
+            CHAT_SYSTEM:AddMessage("Glocal (Account Wide) Icons are now OFF")
+        elseif string.lower(option) == "true" or option == "1" or string.lower(option) == "on" then
+            CustomAbilityIcons.SetOptionGlobalIcons(true)
+            CHAT_SYSTEM:AddMessage("Glocal (Account Wide) Icons are now ON")
+        end
+    end
+end
+
+--- Creates the /setoptionskillstyleicons command, to change the display setting for Skill Style Icons
+function CustomAbilityIcons.CreateSetOptionSkillStyleIconsCommand()
+    SLASH_COMMANDS["/setoptionskillstyleicons"] = function(option)
+        if string.lower(option) == "false" or option == "0" or string.lower(option) == "off" then
+            CustomAbilityIcons.SetOptionSkillStyleIcons(false)
+            CHAT_SYSTEM:AddMessage("Skill Style Icons are now OFF")
+        elseif string.lower(option) == "true" or option == "1" or string.lower(option) == "on" then
+            CustomAbilityIcons.SetOptionSkillStyleIcons(true)
+            CHAT_SYSTEM:AddMessage("Skill Style Icons are now ON")
+        end
+    end
+end
+
+--- Creates the /setoptioncustomicons command, to change the display setting for Custom Scribed Ability Icons
+function CustomAbilityIcons.CreateSetOptionCustomIconsCommand()
+    SLASH_COMMANDS["/setoptioncustomicons"] = function(option)
+        if string.lower(option) == "false" or option == "0" or string.lower(option) == "off" then
+            CustomAbilityIcons.SetOptionCustomIcons(false)
+            CHAT_SYSTEM:AddMessage("Custom Scribed Ability Icons are now OFF")
+        elseif string.lower(option) == "true" or option == "1" or string.lower(option) == "on" then
+            CustomAbilityIcons.SetOptionCustomIcons(true)
+            CHAT_SYSTEM:AddMessage("Custom Scribed Ability Icons are now ON")
+        end
+    end
+end
+
+--- Creates the /setoptionmismatchedicons command, to change the display setting for Mismatched Skill Icon replacements
+function CustomAbilityIcons.CreateSetOptionMismatchedIconsCommand()
+    SLASH_COMMANDS["/setoptionmismatchedicons"] = function(option)
+        if string.lower(option) == "false" or option == "0" or string.lower(option) == "off" then
+            CustomAbilityIcons.SetOptionMismatchedIcons(false)
+            CHAT_SYSTEM:AddMessage("Mismatched Skill Icon replacements are now OFF")
+        elseif string.lower(option) == "true" or option == "1" or string.lower(option) == "on" then
+            CustomAbilityIcons.SetOptionMismatchedIcons(true)
+            CHAT_SYSTEM:AddMessage("Mismatched Skill Icon replacements are now ON")
+        end
     end
 end
