@@ -92,6 +92,7 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
         [HEAL] = ADDON_ROOT .. "ability_grimoire_2handed_heal.dds",
         [SHIELD] = ADDON_ROOT .. "ability_grimoire_2handed_shield.dds",
         [BLEED] = ADDON_ROOT .. "ability_grimoire_2handed_bleed.dds",
+        [POISON] = ADDON_ROOT .. "ability_grimoire_2handed_poison.dds",
         [DEFAULT] = ESO_ROOT .. "ability_grimoire_2handed.dds"
     },
     [SOUL_BURST_ABILITYID] = {
@@ -121,6 +122,7 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
         [DEFAULT] = ESO_ROOT .. "ability_grimoire_assault.dds"
     },
     [TRAVELING_KNIFE_ABILITYID] = {
+        [FROST] = ADDON_ROOT .. "ability_grimoire_dualwield_frost.dds",
         [MAGIC] = ADDON_ROOT .. "ability_grimoire_dualwield_magic.dds",
         [BLEED] = ADDON_ROOT .. "ability_grimoire_dualwield_bleed.dds",
         [POISON] = ADDON_ROOT .. "ability_grimoire_dualwield_poison.dds",
@@ -135,6 +137,7 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
     [VAULT_ABILITYID] = {
         [FLAME] = ADDON_ROOT .. "ability_grimoire_bow_flame.dds",
         [HEAL] = ADDON_ROOT .. "ability_grimoire_bow_heal.dds",
+        [BLEED] = ADDON_ROOT .. "ability_grimoire_bow_bleed.dds",
         [POISON] = ADDON_ROOT .. "ability_grimoire_bow_poison.dds",
         [DISEASE] = ADDON_ROOT .. "ability_grimoire_bow_poison.dds",
         [DEFAULT] = ESO_ROOT .. "ability_grimoire_bow.dds"
