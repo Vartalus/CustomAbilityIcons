@@ -116,6 +116,7 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
         [DEFAULT] = ADDON_ROOT .. "ability_grimoire_fightersguild_physical.dds"
     },
     [TRAMPLE_ABILITYID] = {
+        [FROST] = ADDON_ROOT .. "ability_grimoire_assault_frost.dds",
         [MAGIC] = ADDON_ROOT .. "ability_grimoire_assault_magic.dds",
         [STUN] = ADDON_ROOT .. "ability_grimoire_assault_stun.dds",
         [DISPEL] = ADDON_ROOT .. "ability_grimoire_assault_magic.dds",
@@ -134,7 +135,9 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
     [ULFSILDS_CONTINGENCY_ABILITYID] = {
         [FLAME] = ADDON_ROOT .. "ability_grimoire_magesguild_flame.dds",
         [FROST] = ADDON_ROOT .. "ability_grimoire_magesguild_frost.dds",
+        [SHOCK] = ADDON_ROOT .. "ability_grimoire_magesguild_shock.dds",
         [MAGIC] = ADDON_ROOT .. "ability_grimoire_magesguild_magic.dds",
+        [BLEED] = ADDON_ROOT .. "ability_grimoire_magesguild_bleed.dds",
         [DEFAULT] = ADDON_ROOT .. "ability_grimoire_magesguild_heal.dds"
     },
     [VAULT_ABILITYID] = {
