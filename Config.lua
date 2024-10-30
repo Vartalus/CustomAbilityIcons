@@ -96,12 +96,15 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
         [DEFAULT] = ESO_ROOT .. "ability_grimoire_2handed.dds"
     },
     [SOUL_BURST_ABILITYID] = {
+        [FLAME] = ADDON_ROOT .. "ability_grimoire_soulmagic2_flame.dds",
         [FROST] = ADDON_ROOT .. "ability_grimoire_soulmagic2_frost.dds",
         [SHOCK] = ADDON_ROOT .. "ability_grimoire_soulmagic2_shock.dds",
         [MAGIC] = ESO_ROOT .. "ability_grimoire_soulmagic2.dds",
         [HEAL] = ADDON_ROOT .. "ability_grimoire_soulmagic2_heal.dds",
         [IMMOBILIZE] = ESO_ROOT .. "ability_grimoire_soulmagic2.dds",
         [SHIELD] = ADDON_ROOT .. "ability_grimoire_soulmagic2_shield.dds",
+        [BLEED] = ADDON_ROOT .. "ability_grimoire_soulmagic2_bleed.dds",
+        [DISEASE] = ADDON_ROOT .. "ability_grimoire_soulmagic2_disease.dds",
         [DEFAULT] = ADDON_ROOT .. "ability_grimoire_soulmagic2_physical.dds"
     },
     [TORCHBEARER_ABILITYID] = {
@@ -143,12 +146,15 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
         [DEFAULT] = ESO_ROOT .. "ability_grimoire_bow.dds"
     },
     [WIELD_SOUL_ABILITYID] = {
+        [FLAME] = ADDON_ROOT .. "ability_grimoire_soulmagic1_flame.dds",
         [FROST] = ADDON_ROOT .. "ability_grimoire_soulmagic1_frost.dds",
         [SHOCK] = ADDON_ROOT .. "ability_grimoire_soulmagic1_shock.dds",
         [MAGIC] = ESO_ROOT .. "ability_grimoire_soulmagic1.dds",
         [HEAL] = ADDON_ROOT .. "ability_grimoire_soulmagic1_heal.dds",
         [STUN] = ADDON_ROOT .. "ability_grimoire_soulmagic1_frost.dds",
         [SHIELD] = ADDON_ROOT .. "ability_grimoire_soulmagic1_shield.dds",
+        [BLEED] = ADDON_ROOT .. "ability_grimoire_soulmagic1_bleed.dds",
+        [DISEASE] = ADDON_ROOT .. "ability_grimoire_soulmagic1_disease.dds",
         [DEFAULT] = ADDON_ROOT .. "ability_grimoire_soulmagic1_physical.dds"
     }
 }
