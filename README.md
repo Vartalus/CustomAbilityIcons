@@ -1,6 +1,9 @@
 # CustomAbilityIcons
 Enhances and customizes various skill icons for the Elder Scrolls Online (ESO) game.
 
+> [!IMPORTANT]
+> This Add-on is not created by, affiliated with or sponsored by ZeniMax Media Inc. or its affiliates. The Elder Scrolls® and related logos are registered trademarks or trademarks of ZeniMax Media Inc. in the United States and/or other countries. All rights reserved.
+
 ## Description
 This addon affects the following areas:
 - **Skill Styles:** The skill's normal icon found in the ability bar can be replaced with the selected skill style icon.
