@@ -7,7 +7,7 @@ Enhances and customizes various skill icons for the Elder Scrolls Online (ESO) g
 ## Description
 This addon affects the following areas:
 - **Skill Styles:** The skill's normal icon found in the ability bar can be replaced with the selected skill style icon.
-- **Scribed Skills:** The appropriate recolor of the original icon of a scribed skill can be replaced, based on the focus script that's been used.
+- **Scribed Skills:** The appropriate recolor of the original icon of a scribed skill can replace its default icon, based on the focus script that's been used.
 - **Base Game Icons:** Specifically for the destruction staff skill Pulsar (Impulse morph) while using a frost staff, the base game icon can be replaced with something a bit more frosty.
 
 ## Customization
@@ -20,6 +20,12 @@ This addon can use (but does not rely on) [**LibAddonMenu-2.0**](https://www.eso
 > - **1** (or **0**)
 >
 > Using any of these input combinations enables (or disables) the corresponding setting.
+>
+> The default values are:
+> - **Global Icons:** off
+> - **Skill Style Icons:** on
+> - **Custom Scribed Ability Icons:** on
+> - **Mismatched Base Ability Icons:** off
 
 If LibAddonMenu is enabled, the following settings screen will be available via
 > *Settings -> Addons -> Custom Ability Icons*.
