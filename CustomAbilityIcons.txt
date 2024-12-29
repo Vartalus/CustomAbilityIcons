@@ -10,7 +10,7 @@
 ## Version: 1.0
 ## AddOnVersion: 0100
 ## SavedVariables: CustomAbilityIcons_SavedVariables CustomAbilityIcons_Globals CustomAbilityIcons_Settings
-## OptionalDependsOn: LibAddonMenu-2.0
+## OptionalDependsOn: LibAddonMenu-2.0 FancyActionBar+
 
 CustomAbilityIcons.lua
 Config.lua
