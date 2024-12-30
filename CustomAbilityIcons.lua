@@ -26,6 +26,15 @@ end
 -- Events --
 ------------
 
+--- Triggered when the player switches hotbars, after the "GetSlotTexture" SecurePostHook.
+--- @param _ any
+--- @param slotIndex number The index of a given skill in the action bar.
+--- @param hotbarCategory number The category of the hotbar that triggered the event.
+function CustomAbilityIcons.OnHotbarSlotStateUpdated(_, slotIndex, hotbarCategory)
+    CustomAbilityIcons.ApplySkillStyle(slotIndex, nil)
+    CustomAbilityIcons.ApplySkillStyle(slotIndex, hotbarCategory)
+end
+
 --- To be used in any event when the skill icons need to be refreshed.
 --- @param _ any
 --- @param collectibleId any
@@ -62,6 +71,7 @@ end)
 function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
     if addOnName == CustomAbilityIcons.name then
         EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_COLLECTIBLE_UPDATED, CustomAbilityIcons.OnCollectibleUpdated)
+        EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_HOTBAR_SLOT_STATE_UPDATED, CustomAbilityIcons.OnHotbarSlotStateUpdated)
 
         -- Unregister the event as our addon was loaded and we do not need it to be run for every other addon that will load
         EVENT_MANAGER:UnregisterForEvent(CustomAbilityIcons.name, EVENT_ADD_ON_LOADED)
