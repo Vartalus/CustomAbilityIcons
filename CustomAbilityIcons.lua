@@ -31,7 +31,6 @@ end
 --- @param slotIndex number The index of a given skill in the action bar.
 --- @param hotbarCategory number The category of the hotbar that triggered the event.
 function CustomAbilityIcons.OnHotbarSlotStateUpdated(_, slotIndex, hotbarCategory)
-    CustomAbilityIcons.ApplySkillStyle(slotIndex, nil)
     CustomAbilityIcons.ApplySkillStyle(slotIndex, hotbarCategory)
 end
 
@@ -39,12 +38,9 @@ end
 --- @param _ any
 --- @param collectibleId any
 function CustomAbilityIcons.OnCollectibleUpdated(_, collectibleId)
+    local activeHotbarCategory = GetActiveHotbarCategory()
     for index = CustomAbilityIcons.MIN_INDEX, CustomAbilityIcons.MAX_INDEX do
-        local inactiveBar = currentHotbarCategory == HOTBAR_CATEGORY_PRIMARY
-                            and HOTBAR_CATEGORY_BACKUP or HOTBAR_CATEGORY_PRIMARY
-
-        CustomAbilityIcons.ApplySkillStyle(index, nil)
-        CustomAbilityIcons.ApplySkillStyle(index, inactiveBar)
+        CustomAbilityIcons.ApplySkillStyle(index, activeHotbarCategory)
     end
 end
 

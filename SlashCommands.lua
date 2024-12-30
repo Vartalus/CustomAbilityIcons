@@ -15,9 +15,10 @@ end
 --- Creates the /getabilitydetails command, to retrieve details about the ability found at a specified slot.
 function CustomAbilityIcons.CreateGetAbilityDetailsCommand()
     SLASH_COMMANDS["/getabilitydetails"] = function(skillIndex)
-        local baseAbilityId = CustomAbilityIcons.GetBaseAbilityId(skillIndex, nil)
+        local activeHotbarCategory = GetActiveHotbarCategory()
+        local baseAbilityId = CustomAbilityIcons.GetBaseAbilityId(skillIndex, activeHotbarCategory)
         CHAT_SYSTEM:AddMessage("Base Ability ID: " .. (baseAbilityId or -1))
-        local abilityId = CustomAbilityIcons.GetAbilityId(skillIndex, nil)
+        local abilityId = CustomAbilityIcons.GetAbilityId(skillIndex, activeHotbarCategory)
         CHAT_SYSTEM:AddMessage("Ability ID: " .. (abilityId or -1))
 
         local primaryScriptId, secondaryScriptId, tertiaryScriptId = GetCraftedAbilityActiveScriptIds(abilityId)
@@ -37,11 +38,12 @@ end
 --- Creates the /geticons command, to retrieve available icons for the skill found at the specified slot.
 function CustomAbilityIcons.CreateGetIconsCommand()
     SLASH_COMMANDS["/geticons"] = function(skillIndex)
-        local collectibleIcon = CustomAbilityIcons.GetSkillStyleIcon(skillIndex, nil)
+        local activeHotbarCategory = GetActiveHotbarCategory()
+        local collectibleIcon = CustomAbilityIcons.GetSkillStyleIcon(skillIndex, activeHotbarCategory)
         CHAT_SYSTEM:AddMessage("Collectible Icon: " .. (collectibleIcon or "nil"))
-        local customIcon = CustomAbilityIcons.GetCustomAbilityIcon(skillIndex, nil)
+        local customIcon = CustomAbilityIcons.GetCustomAbilityIcon(skillIndex, activeHotbarCategory)
         CHAT_SYSTEM:AddMessage("Custom Icon: " .. (customIcon or "nil"))
-        local abilityIcon = CustomAbilityIcons.GetDefaultAbilityIcon(skillIndex, nil)
+        local abilityIcon = CustomAbilityIcons.GetDefaultAbilityIcon(skillIndex, activeHotbarCategory)
         CHAT_SYSTEM:AddMessage("Default Icon: " .. (abilityIcon or "nil"))
     end
 end
