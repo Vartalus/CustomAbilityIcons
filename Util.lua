@@ -166,11 +166,11 @@ end
 --- @param hotbarCategory number The category of the hotbar in question.
 --- @param icon string The path of the icon that will be assigned to the skill in question.
 function CustomAbilityIcons.ReplaceAbilityBarIcon(slotIndex, hotbarCategory, icon)
-    local btn = ZO_ActionBar_GetButton(slotIndex, hotbarCategory)
-    if FancyActionBar and FancyActionBar.buttons then
-        if slotIndex > CustomAbilityIcons.SLOT_INDEX_OFFSET then
-            btn = FancyActionBar.buttons[slotIndex]
-        end
+    local btn = nil
+    if FancyActionBar and FancyActionBar.buttons and slotIndex > CustomAbilityIcons.SLOT_INDEX_OFFSET then
+        btn = FancyActionBar.buttons[slotIndex]
+    else
+        btn = ZO_ActionBar_GetButton(slotIndex, hotbarCategory)
     end
     if btn then
         local btnIcon = btn.icon

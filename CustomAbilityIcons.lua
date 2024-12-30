@@ -42,9 +42,13 @@ end
 --- @param hotbarCategory number The category of the hotbar that triggered the event.
 function CustomAbilityIcons.OnHotbarSlotStateUpdated(_, slotIndex, hotbarCategory)
     if slotIndex >= CustomAbilityIcons.MIN_INDEX and slotIndex <= CustomAbilityIcons.MAX_INDEX then
-        if hotbarCategory == HOTBAR_CATEGORY_PRIMARY
-           or hotbarCategory == HOTBAR_CATEGORY_BACKUP
-           or hotbarCategory == HOTBAR_CATEGORY_WEREWOLF
+        -- We need to call ApplySkillStyle for the active hotbar only, because internally it also updates
+        -- the corresponding inactive hotbar skill style, if necessary, and if FancyActionBar+ is activated
+        -- and the inactive hotbar is also visible.
+        if hotbarCategory == GetActiveHotbarCategory()
+           and (hotbarCategory == HOTBAR_CATEGORY_PRIMARY
+                or hotbarCategory == HOTBAR_CATEGORY_BACKUP
+                or hotbarCategory == HOTBAR_CATEGORY_WEREWOLF)
         then
             CustomAbilityIcons.ApplySkillStyle(slotIndex, hotbarCategory)
         end
