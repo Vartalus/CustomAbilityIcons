@@ -26,6 +26,16 @@ end
 -- Events --
 ------------
 
+--- Triggered on initial player load, or reloadUI.
+--- @param _ any
+--- @param isFirstLoad boolean True if it's the first time the UI loads, false otherwise.
+function CustomAbilityIcons.OnPlayerActivated(_, isFirstLoad)
+    local activeHotbarCategory = GetActiveHotbarCategory()
+    for index = CustomAbilityIcons.MIN_INDEX, CustomAbilityIcons.MAX_INDEX do
+        CustomAbilityIcons.ApplySkillStyle(index, activeHotbarCategory)
+    end
+end
+
 --- Triggered when the player switches hotbars, after the "GetSlotTexture" SecurePostHook.
 --- @param _ any
 --- @param slotIndex number The index of a given skill in the action bar.
@@ -68,6 +78,7 @@ function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
     if addOnName == CustomAbilityIcons.name then
         EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_COLLECTIBLE_UPDATED, CustomAbilityIcons.OnCollectibleUpdated)
         EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_HOTBAR_SLOT_STATE_UPDATED, CustomAbilityIcons.OnHotbarSlotStateUpdated)
+        EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_PLAYER_ACTIVATED, CustomAbilityIcons.OnPlayerActivated)
 
         -- Unregister the event as our addon was loaded and we do not need it to be run for every other addon that will load
         EVENT_MANAGER:UnregisterForEvent(CustomAbilityIcons.name, EVENT_ADD_ON_LOADED)
