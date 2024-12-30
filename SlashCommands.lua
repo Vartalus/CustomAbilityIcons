@@ -14,11 +14,21 @@ end
 
 --- Creates the /getabilitydetails command, to retrieve details about the ability found at a specified slot.
 function CustomAbilityIcons.CreateGetAbilityDetailsCommand()
-    SLASH_COMMANDS["/getabilitydetails"] = function(skillIndex)
-        local activeHotbarCategory = GetActiveHotbarCategory()
-        local baseAbilityId = CustomAbilityIcons.GetBaseAbilityId(skillIndex, activeHotbarCategory)
+    SLASH_COMMANDS["/getabilitydetails"] = function(strInput)
+        local params = {}
+        for word in strInput:gmatch("%w+") do table.insert(params, word) end
+        local skillIndex = params[1]
+        local inactive = params[2] or "0"
+
+        local hotbarCategory = GetActiveHotbarCategory()
+        if inactive == "1" then
+            hotbarCategory = hotbarCategory == HOTBAR_CATEGORY_PRIMARY
+                             and HOTBAR_CATEGORY_BACKUP or HOTBAR_CATEGORY_PRIMARY
+        end
+
+        local baseAbilityId = CustomAbilityIcons.GetBaseAbilityId(skillIndex, hotbarCategory)
         CHAT_SYSTEM:AddMessage("Base Ability ID: " .. (baseAbilityId or -1))
-        local abilityId = CustomAbilityIcons.GetAbilityId(skillIndex, activeHotbarCategory)
+        local abilityId = CustomAbilityIcons.GetAbilityId(skillIndex, hotbarCategory)
         CHAT_SYSTEM:AddMessage("Ability ID: " .. (abilityId or -1))
 
         local primaryScriptId, secondaryScriptId, tertiaryScriptId = GetCraftedAbilityActiveScriptIds(abilityId)
@@ -37,13 +47,23 @@ end
 
 --- Creates the /geticons command, to retrieve available icons for the skill found at the specified slot.
 function CustomAbilityIcons.CreateGetIconsCommand()
-    SLASH_COMMANDS["/geticons"] = function(skillIndex)
-        local activeHotbarCategory = GetActiveHotbarCategory()
-        local collectibleIcon = CustomAbilityIcons.GetSkillStyleIcon(skillIndex, activeHotbarCategory)
+    SLASH_COMMANDS["/geticons"] = function(strInput)
+        local params = {}
+        for word in strInput:gmatch("%w+") do table.insert(params, word) end
+        local skillIndex = params[1]
+        local inactive = params[2] or "0"
+        
+        local hotbarCategory = GetActiveHotbarCategory()
+        if inactive == "1" then
+            hotbarCategory = hotbarCategory == HOTBAR_CATEGORY_PRIMARY
+                             and HOTBAR_CATEGORY_BACKUP or HOTBAR_CATEGORY_PRIMARY
+        end
+
+        local collectibleIcon = CustomAbilityIcons.GetSkillStyleIcon(skillIndex, hotbarCategory)
         CHAT_SYSTEM:AddMessage("Collectible Icon: " .. (collectibleIcon or "nil"))
-        local customIcon = CustomAbilityIcons.GetCustomAbilityIcon(skillIndex, activeHotbarCategory)
+        local customIcon = CustomAbilityIcons.GetCustomAbilityIcon(skillIndex, hotbarCategory)
         CHAT_SYSTEM:AddMessage("Custom Icon: " .. (customIcon or "nil"))
-        local abilityIcon = CustomAbilityIcons.GetDefaultAbilityIcon(skillIndex, activeHotbarCategory)
+        local abilityIcon = CustomAbilityIcons.GetDefaultAbilityIcon(skillIndex, hotbarCategory)
         CHAT_SYSTEM:AddMessage("Default Icon: " .. (abilityIcon or "nil"))
     end
 end
