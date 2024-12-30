@@ -41,7 +41,14 @@ end
 --- @param slotIndex number The index of a given skill in the action bar.
 --- @param hotbarCategory number The category of the hotbar that triggered the event.
 function CustomAbilityIcons.OnHotbarSlotStateUpdated(_, slotIndex, hotbarCategory)
-    CustomAbilityIcons.ApplySkillStyle(slotIndex, hotbarCategory)
+    if slotIndex >= CustomAbilityIcons.MIN_INDEX and slotIndex <= CustomAbilityIcons.MAX_INDEX then
+        if hotbarCategory == HOTBAR_CATEGORY_PRIMARY
+           or hotbarCategory == HOTBAR_CATEGORY_BACKUP
+           or hotbarCategory == HOTBAR_CATEGORY_WEREWOLF
+        then
+            CustomAbilityIcons.ApplySkillStyle(slotIndex, hotbarCategory)
+        end
+    end
 end
 
 --- To be used in any event when the skill icons need to be refreshed.
