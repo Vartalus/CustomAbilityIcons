@@ -16,4 +16,5 @@ CustomAbilityIcons.lua
 Config.lua
 Util.lua
 AddonSettings.lua
+InactiveActionBarFAB.lua
 SlashCommands.lua

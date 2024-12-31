@@ -143,33 +143,14 @@ function CustomAbilityIcons.ApplySkillStyleActive(slotIndex, hotbarCategory)
     end
 end
 
---- Retrieves the active skill style for the skill found in the specified slotIndex and applies it
---- to the corresponding slot on the inactive action bar. Will only work if FancyActionBar+ is available.
---- @param slotIndex number The index of a given skill in the action bar.
---- @param hotbarCategory number The category of the hotbar in question.
-function CustomAbilityIcons.ApplySkillStyleInactiveFAB(slotIndex, hotbarCategory)
-    if FancyActionBar then
-        local icon = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, hotbarCategory)
-                     or CustomAbilityIcons.GetCustomAbilityIcon(slotIndex, hotbarCategory)
-                     or CustomAbilityIcons.GetDefaultAbilityIcon(slotIndex, hotbarCategory)
-        if (icon or "") ~= "" then
-            slotIndex = slotIndex + CustomAbilityIcons.SLOT_INDEX_OFFSET
-            --- @diagnostic disable-next-line: param-type-mismatch
-            CustomAbilityIcons.ReplaceAbilityBarIcon(slotIndex, hotbarCategory, icon)
-        end
-    end
-end
-
 --- Calls SetTexture to replace the icon of the skill found in the specified slotIndex.
 --- Needs to be called from multiple events.
 --- @param slotIndex number The index of a given skill in the action bar.
 --- @param hotbarCategory number The category of the hotbar in question.
 --- @param icon string The path of the icon that will be assigned to the skill in question.
 function CustomAbilityIcons.ReplaceAbilityBarIcon(slotIndex, hotbarCategory, icon)
-    local btn = nil
-    if FancyActionBar and FancyActionBar.buttons and slotIndex > CustomAbilityIcons.SLOT_INDEX_OFFSET then
-        btn = FancyActionBar.buttons[slotIndex]
-    else
+    local btn = CustomAbilityIcons.GetInactiveBarButtonFAB(slotIndex)
+    if btn == nil then
         btn = ZO_ActionBar_GetButton(slotIndex, hotbarCategory)
     end
     if btn then

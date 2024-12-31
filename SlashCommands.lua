@@ -52,7 +52,7 @@ function CustomAbilityIcons.CreateGetIconsCommand()
         for word in strInput:gmatch("%w+") do table.insert(params, word) end
         local skillIndex = params[1]
         local inactive = params[2] or "0"
-        
+
         local hotbarCategory = GetActiveHotbarCategory()
         if inactive == "1" then
             hotbarCategory = hotbarCategory == HOTBAR_CATEGORY_PRIMARY
