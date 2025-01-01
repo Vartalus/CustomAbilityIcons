@@ -55,6 +55,14 @@ function CustomAbilityIcons.OnHotbarSlotStateUpdated(_, slotIndex, hotbarCategor
     end
 end
 
+--- Triggered when hotbars are updated, after the "GetSlotTexture" SecurePostHook.
+function CustomAbilityIcons.OnAllHotbarsUpdated()
+    local activeHotbarCategory = GetActiveHotbarCategory()
+    for index = CustomAbilityIcons.MIN_INDEX, CustomAbilityIcons.MAX_INDEX do
+        CustomAbilityIcons.ApplySkillStyle(index, activeHotbarCategory)
+    end
+end
+
 --- To be used in any event when the skill icons need to be refreshed.
 --- @param _ any
 --- @param collectibleId any
@@ -90,6 +98,7 @@ function CustomAbilityIcons.OnAddOnLoaded(eventCode, addOnName)
         EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_COLLECTIBLE_UPDATED, CustomAbilityIcons.OnCollectibleUpdated)
         EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_HOTBAR_SLOT_STATE_UPDATED, CustomAbilityIcons.OnHotbarSlotStateUpdated)
         EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_PLAYER_ACTIVATED, CustomAbilityIcons.OnPlayerActivated)
+        EVENT_MANAGER:RegisterForEvent(CustomAbilityIcons.name, EVENT_ACTION_SLOTS_ALL_HOTBARS_UPDATED, CustomAbilityIcons.OnAllHotbarsUpdated)
 
         -- Unregister the event as our addon was loaded and we do not need it to be run for every other addon that will load
         EVENT_MANAGER:UnregisterForEvent(CustomAbilityIcons.name, EVENT_ADD_ON_LOADED)
