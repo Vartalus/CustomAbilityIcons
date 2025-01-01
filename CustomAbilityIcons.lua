@@ -78,13 +78,21 @@ end
 local originalGetSlotTexture = GetSlotTexture
 SecurePostHook("GetSlotTexture", function(slotIndex, hotbarCategory)
     if hotbarCategory then
-        local newIcon = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, hotbarCategory)
-                        or CustomAbilityIcons.GetCustomAbilityIcon(slotIndex, hotbarCategory)
-        local icon, weaponIcon, activationAnimation = originalGetSlotTexture(slotIndex, hotbarCategory)
-        if newIcon then
-            icon = newIcon
+        if slotIndex >= CustomAbilityIcons.MIN_INDEX and slotIndex <= CustomAbilityIcons.MAX_INDEX
+           and (hotbarCategory == HOTBAR_CATEGORY_PRIMARY
+                or hotbarCategory == HOTBAR_CATEGORY_BACKUP
+                or hotbarCategory == HOTBAR_CATEGORY_WEREWOLF)
+        then
+            local newIcon = CustomAbilityIcons.GetSkillStyleIcon(slotIndex, hotbarCategory)
+                            or CustomAbilityIcons.GetCustomAbilityIcon(slotIndex, hotbarCategory)
+            local icon, weaponIcon, activationAnimation = originalGetSlotTexture(slotIndex, hotbarCategory)
+            if newIcon then
+                icon = newIcon
+            end
+            return icon, weaponIcon, activationAnimation
+        else
+            return originalGetSlotTexture(slotIndex, hotbarCategory)
         end
-        return icon, weaponIcon, activationAnimation
     else
         return originalGetSlotTexture(slotIndex, hotbarCategory)
     end
