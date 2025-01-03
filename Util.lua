@@ -71,16 +71,18 @@ function CustomAbilityIcons.GetCustomAbilityIcon(slotIndex, hotbarCategory)
     if (abilityId or 0) == 0 then
         return nil
     end
-    local baseAbilityId = CustomAbilityIcons.GetBaseAbilityId(slotIndex, hotbarCategory)
-    if (baseAbilityId or 0) == 0 then
-        return nil
-    end
 
     local primaryScriptId, secondaryScriptId, tertiaryScriptId = GetCraftedAbilityActiveScriptIds(abilityId)
     if primaryScriptId ~= 0 then
         local scriptName = GetCraftedAbilityScriptDisplayName(primaryScriptId)
+
+        local defaultIcon = CustomAbilityIcons.GetDefaultAbilityIcon(slotIndex, hotbarCategory)
+        if (defaultIcon or 0) == 0 then
+            return nil
+        end
+
         --- @diagnostic disable-next-line: param-type-mismatch
-        return MapScriptToIcon(scriptName, baseAbilityId)
+        return MapScriptToIcon(scriptName, defaultIcon)
     end
 end
 
@@ -100,19 +102,19 @@ function CustomAbilityIcons.GetDefaultAbilityIcon(slotIndex, hotbarCategory)
     return GetAbilityIcon(abilityId)
 end
 
---- Maps the given scriptName and abilityId to their corresponding custom icon.
---- @param scriptName string The name of the focus script on which to apply the icon.
---- @param baseAbilityId number The base ability id to which the script has been applied.
+--- Maps the given scriptName and defaultIcon to their corresponding custom icon.
+--- @param scriptName string The name of the focus script based on which the custom icon will be applied.
+--- @param defaultIcon string The path of the base game icon to be replaced with our own.
 --- @return string? abilityIcon The path of the icon to be applied to the skill in question.
-function MapScriptToIcon(scriptName, baseAbilityId)
-    if CustomAbilityIcons.CUSTOM_ABILITY_ICONS[baseAbilityId] ~= nil then
-        for key,value in pairs(CustomAbilityIcons.CUSTOM_ABILITY_ICONS[baseAbilityId]) do
+function MapScriptToIcon(scriptName, defaultIcon)
+    if CustomAbilityIcons.CUSTOM_ABILITY_ICONS[defaultIcon] ~= nil then
+        for key,value in pairs(CustomAbilityIcons.CUSTOM_ABILITY_ICONS[defaultIcon]) do
             if string.find(string.lower(scriptName), key) then
                 return value
             end
         end
 
-        return CustomAbilityIcons.CUSTOM_ABILITY_ICONS[baseAbilityId][CustomAbilityIcons.DEFAULT]
+        return CustomAbilityIcons.CUSTOM_ABILITY_ICONS[defaultIcon][CustomAbilityIcons.DEFAULT]
     end
 end
 
