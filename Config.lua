@@ -8,18 +8,21 @@ CustomAbilityIcons.MAX_INDEX = 8                  -- Last ability: 7, Ultimate: 
 CustomAbilityIcons.SLOT_INDEX_OFFSET = 20         -- Offset for backbar abilities indices
 CustomAbilityIcons.COMPANION_INDEX_OFFSET = 30    -- Offset for companion ultimate
 
-local BANNER_BEARER_ABILITYID = 217699
-local ELEMENTAL_EXPLOSION_ABILITYID = 217228
-local MENDERS_BOND_ABILITYID = 220549
-local SHIELD_THROW_ABILITYID = 222966
-local SMASH_ABILITYID = 217184
-local SOUL_BURST_ABILITYID = 217459
-local TORCHBEARER_ABILITYID = 217607
-local TRAMPLE_ABILITYID = 217663
-local TRAVELING_KNIFE_ABILITYID = 217872
-local ULFSILDS_CONTINGENCY_ABILITYID = 222678
-local VAULT_ABILITYID = 214960
-local WIELD_SOUL_ABILITYID = 215731
+local ESO_ROOT = "/esoui/art/icons/"
+local ADDON_ROOT = "/CustomAbilityIcons/icons/"
+
+local BANNER_BEARER_DEFAULT_ICON = ESO_ROOT .. "ability_grimoire_support.dds"
+local ELEMENTAL_EXPLOSION_DEFAULT_ICON = ESO_ROOT .. "ability_grimoire_staffdestro.dds"
+local MENDERS_BOND_DEFAULT_ICON = ESO_ROOT .. "ability_grimoire_staffresto.dds"
+local SHIELD_THROW_DEFAULT_ICON = ESO_ROOT .. "ability_grimoire_1handed.dds"
+local SMASH_DEFAULT_ICON = ESO_ROOT .. "ability_grimoire_2handed.dds"
+local SOUL_BURST_DEFAULT_ICON = ESO_ROOT .. "ability_grimoire_soulmagic2.dds"
+local TORCHBEARER_DEFAULT_ICON = ESO_ROOT .. "ability_grimoire_fightersguild.dds"
+local TRAMPLE_DEFAULT_ICON = ESO_ROOT .. "ability_grimoire_assault.dds"
+local TRAVELING_KNIFE_DEFAULT_ICON = ESO_ROOT .. "ability_grimoire_dualwield.dds"
+local ULFSILDS_CONTINGENCY_DEFAULT_ICON = ESO_ROOT .. "ability_grimoire_magesguild.dds"
+local VAULT_DEFAULT_ICON = ESO_ROOT .. "ability_grimoire_bow.dds"
+local WIELD_SOUL_DEFAULT_ICON = ESO_ROOT .. "ability_grimoire_soulmagic1.dds"
 local FLAME = "flame"
 local FROST = "frost"
 local SHOCK = "shock"
@@ -53,12 +56,9 @@ CustomAbilityIcons.DEFAULT_SETTINGS = {
     replaceMismatchedBaseIcons = false
 }
 
-local ESO_ROOT = "esoui/art/icons/"
-local ADDON_ROOT = "/CustomAbilityIcons/icons/"
-
 --- Holds all custom icon configurations for scribed skills.
 CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
-    [BANNER_BEARER_ABILITYID] = {
+    [BANNER_BEARER_DEFAULT_ICON] = {
         [FLAME] = ESO_ROOT .. "ability_grimoire_support.dds",
         [SHOCK] = ADDON_ROOT .. "ability_grimoire_support_shock.dds",
         [MAGIC] = ADDON_ROOT .. "ability_grimoire_support_magic.dds",
@@ -66,7 +66,7 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
         [MULTITARGET] = ADDON_ROOT .. "ability_grimoire_support_multi.dds",
         [DEFAULT] = ADDON_ROOT .. "ability_grimoire_support_physical.dds"
     },
-    [ELEMENTAL_EXPLOSION_ABILITYID] = {
+    [ELEMENTAL_EXPLOSION_DEFAULT_ICON] = {
         [FLAME] = ESO_ROOT .. "ability_grimoire_staffdestro.dds",
         [FROST] = ADDON_ROOT .. "ability_grimoire_staffdestro_frost.dds",
         [SHOCK] = ADDON_ROOT .. "ability_grimoire_staffdestro_shock.dds",
@@ -75,19 +75,19 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
         [TRAUMA] = ADDON_ROOT .. "ability_grimoire_staffdestro_trauma.dds",
         [DEFAULT] = ADDON_ROOT .. "ability_grimoire_staffdestro_physical.dds"
     },
-    [MENDERS_BOND_ABILITYID] = {
+    [MENDERS_BOND_DEFAULT_ICON] = {
         [MAGIC] = ADDON_ROOT .. "ability_grimoire_staffresto_magic.dds",
         [RESOURCES] = ADDON_ROOT .. "ability_grimoire_staffresto_resources.dds",
         [SHIELD] = ADDON_ROOT .. "ability_grimoire_staffresto_shield.dds",
         [DEFAULT] = ESO_ROOT .. "ability_grimoire_staffresto.dds"
     },
-    [SHIELD_THROW_ABILITYID] = {
+    [SHIELD_THROW_DEFAULT_ICON] = {
         [FROST] = ADDON_ROOT .. "ability_grimoire_1handed_frost.dds",
         [MAGIC] = ADDON_ROOT .. "ability_grimoire_1handed_magic.dds",
         [IMMOBILIZE] = ADDON_ROOT .. "ability_grimoire_1handed_magic.dds",
         [DEFAULT] = ESO_ROOT .. "ability_grimoire_1handed.dds"
     },
-    [SMASH_ABILITYID] = {
+    [SMASH_DEFAULT_ICON] = {
         [MAGIC] = ADDON_ROOT .. "ability_grimoire_2handed_magic.dds",
         [HEAL] = ADDON_ROOT .. "ability_grimoire_2handed_heal.dds",
         [SHIELD] = ADDON_ROOT .. "ability_grimoire_2handed_shield.dds",
@@ -95,7 +95,7 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
         [POISON] = ADDON_ROOT .. "ability_grimoire_2handed_poison.dds",
         [DEFAULT] = ESO_ROOT .. "ability_grimoire_2handed.dds"
     },
-    [SOUL_BURST_ABILITYID] = {
+    [SOUL_BURST_DEFAULT_ICON] = {
         [FLAME] = ADDON_ROOT .. "ability_grimoire_soulmagic2_flame.dds",
         [FROST] = ADDON_ROOT .. "ability_grimoire_soulmagic2_frost.dds",
         [SHOCK] = ADDON_ROOT .. "ability_grimoire_soulmagic2_shock.dds",
@@ -107,7 +107,7 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
         [DISEASE] = ADDON_ROOT .. "ability_grimoire_soulmagic2_disease.dds",
         [DEFAULT] = ADDON_ROOT .. "ability_grimoire_soulmagic2_physical.dds"
     },
-    [TORCHBEARER_ABILITYID] = {
+    [TORCHBEARER_DEFAULT_ICON] = {
         [FLAME] = ESO_ROOT .. "ability_grimoire_fightersguild.dds",
         [FROST] = ADDON_ROOT .. "ability_grimoire_fightersguild_frost.dds",
         [HEAL] = ADDON_ROOT .. "ability_grimoire_fightersguild_heal.dds",
@@ -115,7 +115,7 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
         [BLEED] = ADDON_ROOT .. "ability_grimoire_fightersguild_bleed.dds",
         [DEFAULT] = ADDON_ROOT .. "ability_grimoire_fightersguild_physical.dds"
     },
-    [TRAMPLE_ABILITYID] = {
+    [TRAMPLE_DEFAULT_ICON] = {
         [FROST] = ADDON_ROOT .. "ability_grimoire_assault_frost.dds",
         [MAGIC] = ADDON_ROOT .. "ability_grimoire_assault_magic.dds",
         [STUN] = ADDON_ROOT .. "ability_grimoire_assault_stun.dds",
@@ -125,14 +125,14 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
         [DISEASE] = ADDON_ROOT .. "ability_grimoire_assault_disease.dds",
         [DEFAULT] = ESO_ROOT .. "ability_grimoire_assault.dds"
     },
-    [TRAVELING_KNIFE_ABILITYID] = {
+    [TRAVELING_KNIFE_DEFAULT_ICON] = {
         [FROST] = ADDON_ROOT .. "ability_grimoire_dualwield_frost.dds",
         [MAGIC] = ADDON_ROOT .. "ability_grimoire_dualwield_magic.dds",
         [BLEED] = ADDON_ROOT .. "ability_grimoire_dualwield_bleed.dds",
         [POISON] = ADDON_ROOT .. "ability_grimoire_dualwield_poison.dds",
         [DEFAULT] = ESO_ROOT .. "ability_grimoire_dualwield.dds"
     },
-    [ULFSILDS_CONTINGENCY_ABILITYID] = {
+    [ULFSILDS_CONTINGENCY_DEFAULT_ICON] = {
         [FLAME] = ADDON_ROOT .. "ability_grimoire_magesguild_flame.dds",
         [FROST] = ADDON_ROOT .. "ability_grimoire_magesguild_frost.dds",
         [SHOCK] = ADDON_ROOT .. "ability_grimoire_magesguild_shock.dds",
@@ -140,7 +140,7 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
         [BLEED] = ADDON_ROOT .. "ability_grimoire_magesguild_bleed.dds",
         [DEFAULT] = ADDON_ROOT .. "ability_grimoire_magesguild_heal.dds"
     },
-    [VAULT_ABILITYID] = {
+    [VAULT_DEFAULT_ICON] = {
         [FLAME] = ADDON_ROOT .. "ability_grimoire_bow_flame.dds",
         [HEAL] = ADDON_ROOT .. "ability_grimoire_bow_heal.dds",
         [BLEED] = ADDON_ROOT .. "ability_grimoire_bow_bleed.dds",
@@ -148,7 +148,7 @@ CustomAbilityIcons.CUSTOM_ABILITY_ICONS = {
         [DISEASE] = ADDON_ROOT .. "ability_grimoire_bow_poison.dds",
         [DEFAULT] = ESO_ROOT .. "ability_grimoire_bow.dds"
     },
-    [WIELD_SOUL_ABILITYID] = {
+    [WIELD_SOUL_DEFAULT_ICON] = {
         [FLAME] = ADDON_ROOT .. "ability_grimoire_soulmagic1_flame.dds",
         [FROST] = ADDON_ROOT .. "ability_grimoire_soulmagic1_frost.dds",
         [SHOCK] = ADDON_ROOT .. "ability_grimoire_soulmagic1_shock.dds",
