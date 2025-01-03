@@ -3,12 +3,12 @@
 ; in the United States and/or other countries. All rights reserved.
 ; You can read the full terms at https://account.elderscrollsonline.com/add-on-terms
 
-## Title: |c722cd4Custom|r |cebd991Ability Icons|r v1.2
+## Title: |c722cd4Custom|r |cebd991Ability Icons|r v1.3
 ## Description: The Custom Ability Icons ESO addon changes the ability icons with custom selections.
 ## APIVersion: 101043 101044
 ## Author: |ce6202dVartalus|r & |c0ed5f0Iresil|r
-## Version: 1.2
-## AddOnVersion: 0102
+## Version: 1.3
+## AddOnVersion: 0103
 ## SavedVariables: CustomAbilityIcons_SavedVariables CustomAbilityIcons_Globals CustomAbilityIcons_Settings
 ## OptionalDependsOn: LibAddonMenu-2.0 FancyActionBar+
 

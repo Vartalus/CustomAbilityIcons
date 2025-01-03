@@ -7,7 +7,7 @@ local CustomAbilityIcons = CustomAbilityIcons
 -- Declarations --
 ------------------
 
-local ADDON_VERSION = "1.2"
+local ADDON_VERSION = "1.3"
 
 CustomAbilityIcons.version = ADDON_VERSION
 CustomAbilityIcons.name = "CustomAbilityIcons"
